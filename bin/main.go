@@ -1,8 +1,8 @@
 package main
 
 import (
-	"fmt"
 	"MSA"
+	"fmt"
 )
 
 func main() {
@@ -14,7 +14,7 @@ func main() {
 	fmt.Scan(&name)
 
 	// Affichage du personnage
-	fmt.Println(MSA.initCharacter(name))
+	fmt.Println(MSA.InitCharacter(name))
 
 	// Boucle infinie
 	/*for 0 != 1 {

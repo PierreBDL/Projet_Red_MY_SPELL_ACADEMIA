@@ -2,7 +2,7 @@ package MSA
 
 import "strconv"
 
-func initCharacter(name string) []string {
+func InitCharacter(name string) []string {
 	nom := name
 	class := "Sorcier"
 	pv := 100
