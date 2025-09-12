@@ -19,3 +19,14 @@ func InitCharacter(nom string) Character_class {
 		Defence: 5,
 	}
 }
+
+func InitEnnemi() Character_class {
+	return Character_class{
+		Name:    "Gobelin",
+		Class:   "Monstre",
+		Pv:      50,
+		MaxPv:   50,
+		Attaque: 10,
+		Defence: 5,
+	}
+}

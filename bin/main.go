@@ -38,7 +38,7 @@ func main() {
 	majuscule := cases.Title(language.French)
 	caracter := MSA.InitCharacter(majuscule.String(name))
 
-	println("  o		Nom :", caracter.Name, "\n /|\\|		Class :", caracter.Class, "\n / \\		PV:", caracter.Pv, "/", caracter.MaxPv)
+	println("\n  o ◊		Nom :", caracter.Name, "\n /|\\|		Class :", caracter.Class, "\n / \\		PV:", caracter.Pv, "/", caracter.MaxPv)
 
 	// Tours de jeu
 	tour := 1
@@ -68,6 +68,15 @@ func main() {
 		}
 		switch choix {
 		case 1:
+			// Probabilité d'un ennemi
+			if MSA.Avancer() == true {
+				// Faire apparaître l'ennemi
+				ennemie := MSA.InitEnnemi()
+				println("Un", ennemie.Name, "approche! Faîtes attention")
+				println("  o ◊ 		   o  ")
+				println(" /|\\|		 \\/|\\")
+				println(" / \\		  / \\")
+			}
 			break
 		case 2:
 			break
