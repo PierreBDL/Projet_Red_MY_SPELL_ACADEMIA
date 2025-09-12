@@ -3,6 +3,11 @@ package main
 import (
 	"MSA"
 	"fmt"
+	"unicode"
+
+	// Majuscule
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 )
 
 func main() {
@@ -13,9 +18,17 @@ func main() {
 	fmt.Print("Quel est votre nom ? ")
 	fmt.Scan(&name)
 
-	// Affichage du personnage
-	//fmt.Println(MSA.InitCharacter(name))
-	caracter := MSA.InitCharacter(name)
+	// Vérifier la validité du nom (pas de chiffres ou de caractères spéciaux)
+	for _, caracter := range name {
+		if !unicode.IsLetter(caracter) && !unicode.IsSpace(caracter) {
+			fmt.Print("Quel est votre nom ? ")
+			fmt.Scan(&name)
+		}
+	}
+
+	// Affichage du personnage avec une majuscule
+	majuscule := cases.Title(language.French)
+	caracter := MSA.InitCharacter(majuscule.String(name))
 
 	println("  o		Nom :", caracter.Name, "\n /|\\|		Class :", caracter.Class, "\n / \\		PV:", caracter.Pv, "/", caracter.MaxPv)
 
