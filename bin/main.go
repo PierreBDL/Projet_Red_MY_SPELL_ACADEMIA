@@ -15,15 +15,23 @@ func main() {
 
 	// Création du personnage
 	var name string
-	fmt.Print("Quel est votre nom ? ")
-	fmt.Scan(&name)
+	for {
+		fmt.Print("Quel est votre nom ? ")
+		fmt.Scan(&name)
 
-	// Vérifier la validité du nom (pas de chiffres ou de caractères spéciaux)
-	for _, caracter := range name {
-		if !unicode.IsLetter(caracter) && !unicode.IsSpace(caracter) {
-			fmt.Print("Quel est votre nom ? ")
-			fmt.Scan(&name)
+		// Vérifier la validité du nom
+		valide := true
+		for _, caracter := range name {
+			// Vérifier la validité du nom (pas de chiffres ou de caractères spéciaux)
+			if !unicode.IsLetter(caracter) && !unicode.IsSpace(caracter) {
+				valide = false
+				break
+			}
 		}
+		if valide {
+			break
+		}
+		fmt.Print("\033[A\033[2K") // Remonte et efface les dernières lignes
 	}
 
 	// Affichage du personnage avec une majuscule
@@ -35,14 +43,40 @@ func main() {
 	// Tours de jeu
 	tour := 1
 
+	// Boucle infini
+	running := true
+
 	// Boucle infinie
-	for 0 != 1 {
+	for running == true {
 		// 1er tour : affichage du message d'accueil
 		if tour == 1 {
-			fmt.Println("\n Vous débutez votre aventure dans le monde de la magie !")
+			fmt.Println("\nVous débutez votre aventure dans le monde de la magie !")
 		}
 		// Le reste des tours
-		//fmt.Println("Vous êtes")
+		choix := 0
+		fmt.Println("\nVous êtes au tour", tour, "que voulez vous faire ?")
+		fmt.Println("1] Avancer")
+		fmt.Println("2] Aller en ville")
+		fmt.Println("3] Quitter le jeu")
+		fmt.Print("Quel est votre choix ? ")
+		fmt.Scan(&choix)
+
+		// Annalyse du choix
+		for choix < 1 || choix > 3 {
+			fmt.Print("Choix invalide. Veuillez recommencer ")
+			fmt.Scan(&choix)
+		}
+		switch choix {
+		case 1:
+			break
+		case 2:
+			break
+		case 3:
+			running = false
+			break
+		default:
+			break
+		}
 		tour++
 	}
 }
