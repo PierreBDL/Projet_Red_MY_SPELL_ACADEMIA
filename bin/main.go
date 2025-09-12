@@ -54,7 +54,7 @@ func main() {
 		}
 		// Le reste des tours
 		choix := 0
-		fmt.Println("\nVous êtes au tour", tour, "que voulez vous faire ?")
+		fmt.Println("\nVous êtes au tour", tour, "que voulez vous faire ?\n")
 		fmt.Println("1] Avancer")
 		fmt.Println("2] Aller en ville")
 		fmt.Println("3] Quitter le jeu")
@@ -64,18 +64,22 @@ func main() {
 		// Annalyse du choix
 		for choix < 1 || choix > 3 {
 			fmt.Print("Choix invalide. Veuillez recommencer ")
+			fmt.Print("\033[A\033[2K") // Remonte et efface les dernières lignes
+			fmt.Print("Quel est votre choix ? ")
 			fmt.Scan(&choix)
 		}
 		switch choix {
 		case 1:
+			// Avancé du tour
+			tour++
 			// Probabilité d'un ennemi
 			if MSA.Avancer() == true {
 				// Faire apparaître l'ennemi
 				ennemie := MSA.InitEnnemi()
-				println("Un", ennemie.Name, "approche! Faîtes attention")
-				println("  o ◊ 		   o  ")
-				println(" /|\\|		 \\/|\\")
-				println(" / \\		  / \\")
+				// S'il y a un ennemi
+				if ennemie.Name != "" {
+					MSA.Combat(&caracter, &ennemie)
+				}
 			}
 			break
 		case 2:
@@ -86,6 +90,5 @@ func main() {
 		default:
 			break
 		}
-		tour++
 	}
 }
