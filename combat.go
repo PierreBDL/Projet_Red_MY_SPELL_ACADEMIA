@@ -1,17 +1,18 @@
 package MSA
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func Combat(joueur *Character_class, ennemie *Character_class) {
-	// Graphisme
-	fmt.Println(" 	  o ◊ 		   o  ")
-	fmt.Println(" 	 /|\\|		 \\/|\\")
-	fmt.Println(" 	 / \\		  / \\")
 
 	// Tant que l'ennemie ou le joueur a des PVs
 	for ennemie.Pv > 0 && joueur.Pv > 0 {
+		// Nettoyage de la console
+		Nettoyage(joueur)
+
 		// Graphisme
-		fmt.Println(" 	  o ◊ 		   o  ")
+		fmt.Println("\n\n 	  o ◊ 		   o  ")
 		fmt.Println(" 	 /|\\|		 \\/|\\")
 		fmt.Println(" 	 / \\		  / \\")
 		// Affichage des stats
@@ -51,12 +52,50 @@ func Combat(joueur *Character_class, ennemie *Character_class) {
 			// Si le joueur ou l'ennemie à zéro PVs
 			if ennemie.Pv <= 0 {
 				ennemie.Pv = 0
-				fmt.Println("Félicitation, vous gagnez !")
-			}
-			if joueur.Pv <= 0 {
-				fmt.Println("Game Over !\n")
+				// Nettoyage de la console
+				Nettoyage(joueur)
+
+				// Graphisme
+				fmt.Println("\n\n 	  o ◊ 		   o  ")
+				fmt.Println(" 	 /|\\|		 \\/|\\")
+				fmt.Println(" 	 / \\		  / \\")
+				// Affichage des stats
+				fmt.Println("        Joueur	       ", ennemie.Name)
+				fmt.Println("PVs:  ", joueur.Pv, "/", joueur.MaxPv, "      ", ennemie.Pv, "/", ennemie.MaxPv)
+				fmt.Println("Atq:  	 ", joueur.Attaque, "	 	 ", ennemie.Attaque)
+				fmt.Println("Def:	 ", joueur.Defence, "		 ", ennemie.Defence, "\n")
+				fmt.Println("🎉 Félicitation, vous gagnez !")
+			} else if joueur.Pv <= 0 {
+				// Nettoyage de la console
+				Nettoyage(joueur)
+
+				// Graphisme
+				fmt.Println("\n\n 	  o ◊ 		   o  ")
+				fmt.Println(" 	 /|\\|		 \\/|\\")
+				fmt.Println(" 	 / \\		  / \\")
+				// Affichage des stats
+				fmt.Println("        Joueur	       ", ennemie.Name)
+				fmt.Println("PVs:  ", joueur.Pv, "/", joueur.MaxPv, "      ", ennemie.Pv, "/", ennemie.MaxPv)
+				fmt.Println("Atq:  	 ", joueur.Attaque, "	 	 ", ennemie.Attaque)
+				fmt.Println("Def:	 ", joueur.Defence, "		 ", ennemie.Defence, "\n")
+				fmt.Println("💀 Game Over !\n")
 				joueur.Pv = 0
 				return
+			} else if joueur.Pv == 0 && ennemie.Pv == 0 {
+				// Nettoyage de la console
+				Nettoyage(joueur)
+
+				// Graphisme
+				fmt.Println("\n\n 	  o ◊ 		   o  ")
+				fmt.Println(" 	 /|\\|		 \\/|\\")
+				fmt.Println(" 	 / \\		  / \\")
+				// Affichage des stats
+				fmt.Println("        Joueur	       ", ennemie.Name)
+				fmt.Println("PVs:  ", joueur.Pv, "/", joueur.MaxPv, "      ", ennemie.Pv, "/", ennemie.MaxPv)
+				fmt.Println("Atq:  	 ", joueur.Attaque, "	 	 ", ennemie.Attaque)
+				fmt.Println("Def:	 ", joueur.Defence, "		 ", ennemie.Defence, "\n")
+				fmt.Println("💀 Game Over !\n")
+				joueur.Pv = 0
 			}
 		case 2:
 			fmt.Println("Inventaire vide pour l'instant…\n")

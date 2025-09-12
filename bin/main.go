@@ -17,7 +17,7 @@ func main() {
 	var name string
 	for {
 		fmt.Print("Quel est votre nom ? ")
-		fmt.Scan(&name)
+		fmt.Scanln(&name)
 
 		// Vérifier la validité du nom
 		valide := true
@@ -31,14 +31,17 @@ func main() {
 		if valide {
 			break
 		}
-		fmt.Print("\033[A\033[2K") // Remonte et efface les dernières lignes
+		// Nettoyer la console
+		fmt.Print("\033[A\033[2K")
+		fmt.Print("\033[A\033[2K")
 	}
 
 	// Affichage du personnage avec une majuscule
 	majuscule := cases.Title(language.French)
 	caracter := MSA.InitCharacter(majuscule.String(name))
 
-	println("\n  o ◊		Nom :", caracter.Name, "\n /|\\|		Class :", caracter.Class, "\n / \\		PV:", caracter.Pv, "/", caracter.MaxPv)
+	// Nettoyer la console
+	MSA.Nettoyage(&caracter)
 
 	// Tours de jeu
 	tour := 1
@@ -70,6 +73,7 @@ func main() {
 		}
 		switch choix {
 		case 1:
+			MSA.Nettoyage(&caracter)
 			// Avancé du tour
 			tour++
 			// Probabilité d'un ennemi
@@ -81,9 +85,9 @@ func main() {
 					MSA.Combat(&caracter, &ennemie)
 				}
 			}
-			break
 		case 2:
-			break
+			MSA.Nettoyage(&caracter)
+			fmt.Println("\nVous entrez dans la ville de Musutafu !")
 		case 3:
 			running = false
 			break
