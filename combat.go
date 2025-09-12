@@ -4,12 +4,23 @@ import "fmt"
 
 func Combat(joueur *Character_class, ennemie *Character_class) {
 	// Graphisme
-	println("  o ◊ 		   o  ")
-	println(" /|\\|		 \\/|\\")
-	println(" / \\		  / \\")
+	fmt.Println(" 	  o ◊ 		   o  ")
+	fmt.Println(" 	 /|\\|		 \\/|\\")
+	fmt.Println(" 	 / \\		  / \\")
 
 	// Tant que l'ennemie ou le joueur a des PVs
 	for ennemie.Pv > 0 && joueur.Pv > 0 {
+		// Graphisme
+		fmt.Println(" 	  o ◊ 		   o  ")
+		fmt.Println(" 	 /|\\|		 \\/|\\")
+		fmt.Println(" 	 / \\		  / \\")
+		// Affichage des stats
+		fmt.Println("        Joueur	       ", ennemie.Name)
+		fmt.Println("PVs:  ", joueur.Pv, "/", joueur.MaxPv, "      ", ennemie.Pv, "/", ennemie.MaxPv)
+		fmt.Println("Atq:  	 ", joueur.Attaque, "	 	 ", ennemie.Attaque)
+		fmt.Println("Def:	 ", joueur.Defence, "		 ", ennemie.Defence, "\n")
+
+		// Choix de l'attaque
 		choix_attaque := 0
 		println("Un", ennemie.Name, "approche! Faîtes attention")
 		fmt.Println("1] Attaquer")
@@ -28,6 +39,8 @@ func Combat(joueur *Character_class, ennemie *Character_class) {
 		// Gestion du combat
 		switch choix_attaque {
 		case 1:
+			fmt.Print("\033[A\033[2K") // supprime la ligne attaque du joueur
+			fmt.Print("\033[A\033[2K") // supprime la ligne attaque de l'ennemi
 			// Attaque du joueur
 			ennemie.Pv -= (joueur.Attaque - ennemie.Defence)
 			println("\nVous infligez", joueur.Attaque-ennemie.Defence, "dommages !")
@@ -41,8 +54,8 @@ func Combat(joueur *Character_class, ennemie *Character_class) {
 				fmt.Println("Félicitation, vous gagnez !")
 			}
 			if joueur.Pv <= 0 {
-				fmt.Println("Game Over !\nVous recommencez avec 50% de vos PVs")
-				joueur.Pv = joueur.MaxPv / 2
+				fmt.Println("Game Over !\n")
+				joueur.Pv = 0
 				return
 			}
 		case 2:
