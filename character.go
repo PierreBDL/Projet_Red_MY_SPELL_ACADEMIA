@@ -1,23 +1,21 @@
 package MSA
 
-import "strconv"
+type Character_class struct {
+	Name    string
+	Class   string
+	Pv      int
+	MaxPv   int
+	Attaque int
+	Defence int
+}
 
-func InitCharacter(name string) []string {
-	nom := name
-	class := "Sorcier"
-	pv := 100
-	maxPv := 100
-	attaque := 20
-	defence := 5
-
-	// Préparation à l'envoi
-	caracter := make([]string, 6)
-	caracter[0] = nom
-	caracter[1] = class
-	caracter[2] = strconv.Itoa(pv)
-	caracter[3] = strconv.Itoa(maxPv)
-	caracter[4] = strconv.Itoa(attaque)
-	caracter[5] = strconv.Itoa(defence)
-
-	return caracter
+func InitCharacter(nom string) Character_class {
+	return Character_class{
+		Name:    nom,
+		Class:   "Sorcier",
+		Pv:      100,
+		MaxPv:   100,
+		Attaque: 20,
+		Defence: 5,
+	}
 }
