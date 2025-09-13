@@ -2,7 +2,10 @@ package main
 
 import (
 	"MSA"
+	"bufio"
 	"fmt"
+	"os"
+	"strings"
 	"unicode"
 
 	// Majuscule
@@ -16,8 +19,11 @@ func main() {
 	// Création du personnage
 	var name string
 	for {
+		// Lecture des noms même avec des espaces pour éviter les bugs
+		reader := bufio.NewReader(os.Stdin)
 		fmt.Print("Quel est votre nom ? ")
-		fmt.Scanln(&name)
+		name, _ = reader.ReadString('\n') // Lit tout jusqu'à l'appui sur entrée
+		name = strings.Trim(name, "\r\n") // enlève le \n à la fin et le \r du début
 
 		// Vérifier la validité du nom
 		valide := true

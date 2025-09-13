@@ -3,7 +3,7 @@ package MSA
 import "fmt"
 
 func Nettoyage(joueur *Character_class) {
-	for i := 0; i < 40; i++ { // 20 lignes nettoyées
+	for i := 0; i < 50; i++ { // 20 lignes nettoyées
 		fmt.Print("\033[A\033[2K")
 	}
 	fmt.Println(" ###### MY SPELL ACADEMIA ######")
@@ -14,6 +14,12 @@ func Nettoyage(joueur *Character_class) {
 	}
 
 	// Si le personnage est fait, on affiche sa fiche de stats
-	println("\n   o  ◊		Nom :", joueur.Name, "		Argent:", joueur.Gold, "G\n  /|\\ |		Classe :", joueur.Class, "\n / | \\|		Niveau:", joueur.Niveau, "\n  / \\ |		PV:", joueur.Pv, "/", joueur.MaxPv)
+	fmt.Printf(`
+   o  ◊        Nom : %s      	Argent: %d G
+  /|\ |        Classe : %s
+ / | \|        Niveau: %d
+  / \ |        PV: %d / %d
+`,
+		joueur.Name, joueur.Gold, joueur.Class, joueur.Niveau, joueur.Pv, joueur.MaxPv)
 
 }
