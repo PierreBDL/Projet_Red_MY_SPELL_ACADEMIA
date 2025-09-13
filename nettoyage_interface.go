@@ -9,6 +9,6 @@ func Nettoyage(joueur *Character_class) {
 	fmt.Println(" ###### MY SPELL ACADEMIA ######")
 
 	// Si le personnage est fait, on affiche sa fiche de stats
-	println("\n  o ◊		Nom :", joueur.Name, "\n /|\\|		Classe :", joueur.Class, "\n / \\		PV:", joueur.Pv, "/", joueur.MaxPv)
+	println("\n  o  ◊		Nom :", joueur.Name, "\n /|\\ |		Classe :", joueur.Class, "\n \\/|\\/|		PV:", joueur.Pv, "/", joueur.MaxPv, "\n / \\|		Argent:", joueur.Gold, "G")
 
 }
