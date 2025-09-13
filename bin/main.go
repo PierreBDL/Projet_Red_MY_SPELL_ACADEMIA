@@ -58,46 +58,50 @@ func main() {
 		// toujours vérifier si le joueur est mort
 		if caracter.Pv <= 0 {
 			// Gestion de la mort
-			MSA.WasDead(&caracter)
+			running = MSA.WasDead(&caracter)
 		}
-		// Le reste des tours
-		choix := 0
-		fmt.Println("\nVous êtes au tour", tour, "que voulez vous faire ?\n")
-		fmt.Println("1] Avancer")
-		fmt.Println("2] Aller en ville")
-		fmt.Println("3] Quitter le jeu")
-		fmt.Print("Quel est votre choix ? ")
-		fmt.Scan(&choix)
 
-		// Annalyse du choix
-		for choix < 1 || choix > 3 {
-			fmt.Print("Choix invalide. Veuillez recommencer ")
-			fmt.Print("\033[A\033[2K") // Remonte et efface les dernières lignes
+		// Vérifier si on est toujours en jeu (si on est mort, running = false donc ne rien afficher)
+		if running {
+			// Le reste des tours
+			choix := 0
+			fmt.Println("\nVous êtes au tour", tour, "que voulez vous faire ?\n")
+			fmt.Println("1] Avancer")
+			fmt.Println("2] Aller en ville")
+			fmt.Println("3] Quitter le jeu")
 			fmt.Print("Quel est votre choix ? ")
 			fmt.Scan(&choix)
-		}
-		switch choix {
-		case 1:
-			MSA.Nettoyage(&caracter)
-			// Avancé du tour
-			tour++
-			// Probabilité d'un ennemi
-			if MSA.Avancer() == true {
-				// Faire apparaître l'ennemi
-				ennemie := MSA.InitEnnemi()
-				// S'il y a un ennemi
-				if ennemie.Name != "" {
-					MSA.Combat(&caracter, &ennemie)
-				}
+
+			// Annalyse du choix
+			for choix < 1 || choix > 3 {
+				fmt.Print("Choix invalide. Veuillez recommencer ")
+				fmt.Print("\033[A\033[2K") // Remonte et efface les dernières lignes
+				fmt.Print("Quel est votre choix ? ")
+				fmt.Scan(&choix)
 			}
-		case 2:
-			MSA.Nettoyage(&caracter)
-			fmt.Println("\nVous entrez dans la ville de Musutafu !")
-		case 3:
-			running = false
-			break
-		default:
-			break
+			switch choix {
+			case 1:
+				MSA.Nettoyage(&caracter)
+				// Avancé du tour
+				tour++
+				// Probabilité d'un ennemi
+				if MSA.Avancer() == true {
+					// Faire apparaître l'ennemi
+					ennemie := MSA.InitEnnemi()
+					// S'il y a un ennemi
+					if ennemie.Name != "" {
+						MSA.Combat(&caracter, &ennemie)
+					}
+				}
+			case 2:
+				MSA.Nettoyage(&caracter)
+				fmt.Println("\nVous entrez dans la ville de Musutafu !")
+			case 3:
+				running = false
+				break
+			default:
+				break
+			}
 		}
 	}
 }

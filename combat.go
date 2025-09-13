@@ -70,6 +70,9 @@ func Combat(joueur *Character_class, ennemie *Character_class) {
 				joueur.Gold += ennemie.Gold
 				joueur.Niveau += ennemie.Niveau
 
+				// Retour au menu
+				return
+
 			} else if joueur.Pv <= 0 {
 				// Nettoyage de la console
 				Nettoyage(joueur)
@@ -83,8 +86,7 @@ func Combat(joueur *Character_class, ennemie *Character_class) {
 				fmt.Println("PVs:  ", joueur.Pv, "/", joueur.MaxPv, "      ", ennemie.Pv, "/", ennemie.MaxPv)
 				fmt.Println("Atq:  	 ", joueur.Attaque, "	 	 ", ennemie.Attaque)
 				fmt.Println("Def:	 ", joueur.Defence, "		 ", ennemie.Defence, "\n")
-				// Gestion de la mort
-				WasDead(joueur)
+				// Revoi au menu où se trouve la gestion de la mort
 				return
 			} else if joueur.Pv == 0 && ennemie.Pv == 0 {
 				// Nettoyage de la console
@@ -99,8 +101,8 @@ func Combat(joueur *Character_class, ennemie *Character_class) {
 				fmt.Println("PVs:  ", joueur.Pv, "/", joueur.MaxPv, "      ", ennemie.Pv, "/", ennemie.MaxPv)
 				fmt.Println("Atq:  	 ", joueur.Attaque, "	 	 ", ennemie.Attaque)
 				fmt.Println("Def:	 ", joueur.Defence, "		 ", ennemie.Defence, "\n")
-				// Gestion de la mort
-				WasDead(joueur)
+				// Revoi au menu où se trouve la gestion de la mort
+				return
 			}
 		case 2:
 			fmt.Println("Inventaire vide pour l'instant…\n")
