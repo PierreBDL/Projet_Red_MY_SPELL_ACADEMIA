@@ -55,6 +55,11 @@ func main() {
 		if tour == 1 {
 			fmt.Println("\nVous débutez votre aventure dans le monde de la magie !")
 		}
+		// toujours vérifier si le joueur est mort
+		if caracter.Pv <= 0 {
+			// Gestion de la mort
+			MSA.WasDead(&caracter)
+		}
 		// Le reste des tours
 		choix := 0
 		fmt.Println("\nVous êtes au tour", tour, "que voulez vous faire ?\n")

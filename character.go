@@ -8,6 +8,7 @@ type Character_class struct {
 	Attaque int
 	Defence int
 	Gold    int
+	Niveau  int
 }
 
 func InitCharacter(nom string) Character_class {
@@ -19,6 +20,7 @@ func InitCharacter(nom string) Character_class {
 		Attaque: 20,
 		Defence: 5,
 		Gold:    100,
+		Niveau:  1,
 	}
 }
 
@@ -30,6 +32,7 @@ func InitEnnemi() Character_class {
 		MaxPv:   50,
 		Attaque: 10,
 		Defence: 5,
-		Gold:    0,
+		Gold:    10, // Récompense
+		Niveau:  1,
 	}
 }

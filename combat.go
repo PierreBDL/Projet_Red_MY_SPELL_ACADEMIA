@@ -64,7 +64,12 @@ func Combat(joueur *Character_class, ennemie *Character_class) {
 				fmt.Println("PVs:  ", joueur.Pv, "/", joueur.MaxPv, "      ", ennemie.Pv, "/", ennemie.MaxPv)
 				fmt.Println("Atq:  	 ", joueur.Attaque, "	 	 ", ennemie.Attaque)
 				fmt.Println("Def:	 ", joueur.Defence, "		 ", ennemie.Defence, "\n")
-				fmt.Println("🎉 Félicitation, vous gagnez !")
+				fmt.Println("🎉 Félicitation, vous gagnez", ennemie.Gold, "Or et", ennemie.Niveau, "niveau(x)!")
+
+				// Ajout des récompenses (Or, expérience et vie)
+				joueur.Gold += ennemie.Gold
+				joueur.Niveau += ennemie.Niveau
+
 			} else if joueur.Pv <= 0 {
 				// Nettoyage de la console
 				Nettoyage(joueur)
@@ -78,8 +83,8 @@ func Combat(joueur *Character_class, ennemie *Character_class) {
 				fmt.Println("PVs:  ", joueur.Pv, "/", joueur.MaxPv, "      ", ennemie.Pv, "/", ennemie.MaxPv)
 				fmt.Println("Atq:  	 ", joueur.Attaque, "	 	 ", ennemie.Attaque)
 				fmt.Println("Def:	 ", joueur.Defence, "		 ", ennemie.Defence, "\n")
-				fmt.Println("💀 Game Over !\n")
-				joueur.Pv = 0
+				// Gestion de la mort
+				WasDead(joueur)
 				return
 			} else if joueur.Pv == 0 && ennemie.Pv == 0 {
 				// Nettoyage de la console
@@ -94,8 +99,8 @@ func Combat(joueur *Character_class, ennemie *Character_class) {
 				fmt.Println("PVs:  ", joueur.Pv, "/", joueur.MaxPv, "      ", ennemie.Pv, "/", ennemie.MaxPv)
 				fmt.Println("Atq:  	 ", joueur.Attaque, "	 	 ", ennemie.Attaque)
 				fmt.Println("Def:	 ", joueur.Defence, "		 ", ennemie.Defence, "\n")
-				fmt.Println("💀 Game Over !\n")
-				joueur.Pv = 0
+				// Gestion de la mort
+				WasDead(joueur)
 			}
 		case 2:
 			fmt.Println("Inventaire vide pour l'instant…\n")
