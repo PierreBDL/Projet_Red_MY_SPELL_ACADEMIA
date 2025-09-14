@@ -42,9 +42,35 @@ func main() {
 		fmt.Print("\033[A\033[2K")
 	}
 
-	// Affichage du personnage avec une majuscule
-	majuscule := cases.Title(language.French)
-	caracter := MSA.InitCharacter(majuscule.String(name))
+	// Choix de la classe du personnage
+	choix_classe := 0
+	fmt.Println("\nQue voulez-vous être\n")
+	fmt.Println("1] Sorcier")
+	fmt.Println("2] Alchimiste")
+	fmt.Print("Quel est votre choix ? ")
+	fmt.Scan(&choix_classe)
+
+	// Variable de classe
+	var caracter MSA.Character_class
+
+	// Choix de la classe
+	switch choix_classe {
+	case 1:
+		// Création du perso avec la classe sorcier
+		majuscule := cases.Title(language.French)
+		caracter = MSA.InitCharacter(majuscule.String(name), 1)
+	case 2:
+		// Création du perso avec la classe alchimiste
+		majuscule := cases.Title(language.French)
+		caracter = MSA.InitCharacter(majuscule.String(name), 2)
+	default:
+		// Nettoyer la console
+		fmt.Print("\033[A\033[2K")
+		fmt.Print("\033[A\033[2K")
+		fmt.Print("Quel est votre choix ? ")
+		fmt.Scan(&choix_classe)
+
+	}
 
 	// Nettoyer la console
 	MSA.Nettoyage(&caracter)
