@@ -43,14 +43,15 @@ func InitCharacter(nom string, classe int) Character_class {
 	if classe == 666 {
 		// Choix par défaut pour éviter les bugs
 		return Character_class{
-			Name:    "Harry Poter",
-			Class:   "Sang mélé",
-			Pv:      150,
-			MaxPv:   150,
-			Attaque: 50,
-			Defence: 25,
-			Gold:    1000,
-			Niveau:  1,
+			Name:       "Harry Poter",
+			Class:      "Sang mélé",
+			Pv:         150,
+			MaxPv:      150,
+			Attaque:    50,
+			Defence:    25,
+			Gold:       1000,
+			Niveau:     1,
+			Inventaire: []string{"Potion de soin", "Potion de soin", "Potion de soin", "Potion de soin"},
 		}
 	}
 

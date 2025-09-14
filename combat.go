@@ -106,6 +106,23 @@ func Combat(joueur *Character_class, ennemie *Character_class) {
 			}
 		case 2:
 			accessInventory(joueur, 1)
+
+			// Utilisation des objets
+			inventaire_choix := 0
+			println("Utiliser un objet de l'inventaire ?")
+			fmt.Println("1] Potion de soin")
+			fmt.Println("2] Quitter")
+			fmt.Print("Quel est votre choix ? ")
+			fmt.Scan(&inventaire_choix)
+
+			// Choix
+			switch inventaire_choix {
+			case 1:
+				utiliserObjet(joueur, "Potion de soin")
+			case 2:
+				break
+			}
+
 		case 3:
 			fmt.Println("Vous fuyez le combat !\n")
 			return
