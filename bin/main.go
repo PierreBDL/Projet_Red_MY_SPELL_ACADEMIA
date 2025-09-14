@@ -63,6 +63,10 @@ func main() {
 		// Création du perso avec la classe alchimiste
 		majuscule := cases.Title(language.French)
 		caracter = MSA.InitCharacter(majuscule.String(name), 2)
+	case 666:
+		// Easter Egg Harry Poter
+		majuscule := cases.Title(language.French)
+		caracter = MSA.InitCharacter(majuscule.String(""), 666)
 	default:
 		// Nettoyer la console
 		fmt.Print("\033[A\033[2K")

@@ -105,12 +105,17 @@ func Combat(joueur *Character_class, ennemie *Character_class) {
 				return
 			}
 		case 2:
-			fmt.Println("Inventaire vide pour l'instant…\n")
+			accessInventory(joueur, 1)
 		case 3:
 			fmt.Println("Vous fuyez le combat !\n")
 			return
 		default:
 			fmt.Println("Choix invalide")
+			println("Un", ennemie.Name, "approche! Faîtes attention")
+			fmt.Println("1] Attaquer")
+			fmt.Println("2] Regarder dans l'inventaire")
+			fmt.Println("3] Fuir")
+			fmt.Print("Quel est votre choix ? ")
 			fmt.Scan(&choix_attaque)
 		}
 
