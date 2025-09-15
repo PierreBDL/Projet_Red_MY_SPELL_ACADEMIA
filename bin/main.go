@@ -104,8 +104,8 @@ func main() {
 			// Le reste des tours
 			choix := 0
 			fmt.Println("\nVous êtes au tour", tour, "que voulez vous faire ?\n")
-			fmt.Println("1] Avancer")
-			fmt.Println("2] Aller en ville")
+			fmt.Println("1] ⏩ Avancer")
+			fmt.Println("2] 🏙️  Aller en ville")
 			fmt.Println("3] Quitter le jeu")
 			fmt.Print("Quel est votre choix ? ")
 			fmt.Scan(&choix)
@@ -145,7 +145,6 @@ func main() {
 				MSA.Entree_ville(&caracter)
 			case 3:
 				running = false
-				break
 			default:
 				break
 			}

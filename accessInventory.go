@@ -2,55 +2,40 @@ package MSA
 
 import "fmt"
 
+// Voir inventaire ou autre action
 func accessInventory(joueur *Character_class, action int) {
-	// Voir inventaire
 	if action == 1 {
-		// Si l'inventaire est vide
 		fmt.Println("Dans votre inventaire :")
 		if len(joueur.Inventaire) == 0 {
 			fmt.Println("Inventaire vide")
 			return
 		}
-		// Création d'un dictionnaire pour savoir combien il y a d'objet de chaque type
-		compte := make(map[string]int)
-		for _, objet := range joueur.Inventaire {
-			compte[objet]++
-		}
-		// Affichage
-		for objet, nb := range compte {
+		// Affichage des objets avec leur quantité
+		for objet, nb := range joueur.Inventaire {
 			fmt.Printf("x%d : %s\n", nb, objet)
 		}
 	}
 }
 
+// Utiliser un objet
 func utiliserObjet(joueur *Character_class, objet string) {
-	// Chercher si on a l'objet
-	recherche := objet
-	trouve := false
-	var position_objet int
-
-	for i, potion := range joueur.Inventaire {
-		if potion == recherche {
-			trouve = true
-			// Sera utile pour consommer l'objet
-			position_objet = i
-			break
-		}
+	qty, ok := joueur.Inventaire[objet]
+	if !ok || qty == 0 {
+		fmt.Println(objet, "n'est pas dans votre inventaire")
+		return
 	}
 
-	if trouve {
-		if objet == "Potion de soin" {
-			joueur.Pv += 50
-			// Eviter dépassement des PVs max
-			if joueur.Pv > joueur.MaxPv {
-				joueur.Pv = joueur.MaxPv
-			}
-			// Consommer objet
-			joueur.Inventaire = append(joueur.Inventaire[:position_objet], joueur.Inventaire[position_objet+1:]...)
-			fmt.Println("Vous utilisez une Potion de soin ! PV :", joueur.Pv, "/", joueur.MaxPv)
-			return
+	// Exemple pour une Potion de soin
+	if objet == "Potion de soin" {
+		joueur.Pv += 50
+		if joueur.Pv > joueur.MaxPv {
+			joueur.Pv = joueur.MaxPv
 		}
-	} else {
-		fmt.Println(recherche, "n'est pas dans votre inventaire")
+		// Consommer une potion
+		joueur.Inventaire[objet]--
+		if joueur.Inventaire[objet] == 0 {
+			delete(joueur.Inventaire, objet) // supprime la clé si plus d'objet
+		}
+		fmt.Println("Vous utilisez une Potion de soin ! PV :", joueur.Pv, "/", joueur.MaxPv)
 	}
 }

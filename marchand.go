@@ -1,51 +1,66 @@
 package MSA
 
-import "fmt"
+import (
+	"fmt"
+)
 
-// ==================== STRUCTURE MARCHAND ====================
+// Structure Marchand
 type Merchant struct {
-	Name    string
-	Gold    int
-	Potions map[string]int
-	Items   map[string]int
+	name     string
+	potions  map[string]int
+	items    map[string]int
+	upgrades map[string]int
 }
 
-// Crée un nouveau marchand
-func NewMerchant(name string, gold int) *Merchant {
+// Création d'un marchand
+func NewMerchant(name string) *Merchant {
 	return &Merchant{
-		Name: name,
-		Gold: gold,
-		Potions: map[string]int{
-			"Potion de soin":   200,
-			"Potion de poison": 200,
+		name: name,
+		potions: map[string]int{
+			"potion_de_soin":   200,
+			"potion_de_poison": 200,
 		},
-		Items: map[string]int{
-			"Bois de sureau":        500,
-			"Plume de phénix":       600,
-			"Baguette surpuissante": 1000,
+		items: map[string]int{
+			"bois_de_sureau":        500,
+			"plume_de_phenix":       600,
+			"baguette_surpuissante": 1000,
+		},
+		upgrades: map[string]int{
+			"augmentation_inventaire": 100, // coût pour augmenter l'inventaire
 		},
 	}
 }
 
-// Affiche les objets d'une catégorie et retourne la liste des noms
-func (m *Merchant) DisplayCategory(choice int) []string {
+// Affichage des catégories
+func (m *Merchant) DisplayCategory(choice int, joueur *Character_class) []string {
 	var keys []string
 	switch choice {
 	case 1:
 		fmt.Println("Catégorie : Potions")
 		i := 1
-		for potion, price := range m.Potions {
+		for potion, price := range m.potions {
 			fmt.Printf("%d - %s : %d or\n", i, potion, price)
 			keys = append(keys, potion)
 			i++
 		}
 	case 2:
-		fmt.Println("Catégorie : Objets Magiques")
+		fmt.Println("Catégorie : Baguette Magique")
 		i := 1
-		for item, price := range m.Items {
+		for item, price := range m.items {
 			fmt.Printf("%d - %s : %d or\n", i, item, price)
 			keys = append(keys, item)
 			i++
+		}
+	case 3:
+		fmt.Println("Catégorie : Améliorations")
+		if joueur.upgradesBought < 3 {
+			for upgrade, price := range m.upgrades {
+				fmt.Printf("%d - %s : %d or\n", 1, upgrade, price)
+				fmt.Println("💡 Astuce : tu peux augmenter ton inventaire de 1. Max 3 fois.")
+				keys = append(keys, upgrade)
+			}
+		} else {
+			fmt.Println("❌ Tu as déjà acheté toutes les améliorations disponibles.")
 		}
 	default:
 		fmt.Println("Choix invalide")
@@ -53,9 +68,27 @@ func (m *Merchant) DisplayCategory(choice int) []string {
 	return keys
 }
 
-// ==================== FONCTION D'ACHAT ====================
-func Buy(joueur *Character_class, m *Merchant, category int, itemName string, quantity int) {
-	// Vérifie la quantité
+// Fonction d'achat
+func (joueur *Character_class) Buy(m *Merchant, category int, itemName string, quantity int) {
+	if category == 3 {
+		// Gestion des améliorations
+		if joueur.upgradesBought >= 3 {
+			fmt.Println("❌ Tu ne peux plus acheter cette amélioration.")
+			return
+		}
+		price := m.upgrades[itemName]
+		if joueur.Gold < price {
+			fmt.Println("❌ Pas assez d'or pour cette amélioration.")
+			return
+		}
+		joueur.Gold -= price
+		joueur.InventoryLimit++
+		joueur.upgradesBought++
+		fmt.Printf("✅ Amélioration achetée ! Nouvelle limite d'inventaire : %d. Or restant : %d\n", joueur.InventoryLimit, joueur.Gold)
+		return
+	}
+
+	// Limite d'achat pour les objets
 	if quantity < 1 || quantity > 5 {
 		fmt.Println("❌ Vous ne pouvez acheter qu'entre 1 et 5 exemplaires.")
 		return
@@ -63,14 +96,14 @@ func Buy(joueur *Character_class, m *Merchant, category int, itemName string, qu
 
 	var price int
 	if category == 1 {
-		val, ok := m.Potions[itemName]
+		val, ok := m.potions[itemName]
 		if !ok {
 			fmt.Println("❌ Potion introuvable.")
 			return
 		}
 		price = val * quantity
 	} else if category == 2 {
-		val, ok := m.Items[itemName]
+		val, ok := m.items[itemName]
 		if !ok {
 			fmt.Println("❌ Objet introuvable.")
 			return
@@ -81,59 +114,59 @@ func Buy(joueur *Character_class, m *Merchant, category int, itemName string, qu
 		return
 	}
 
-	// Vérifie si le joueur a assez d'or
 	if joueur.Gold < price {
 		fmt.Println("❌ Pas assez d'or pour cet achat.")
 		return
 	}
 
-	// Déduit l'or et ajoute l'objet à l'inventaire du joueur
+	// Déduction or + ajout inventaire
 	joueur.Gold -= price
-	for i := 0; i < quantity; i++ {
-		joueur.Inventaire = append(joueur.Inventaire, itemName)
-	}
-
+	joueur.Inventaire[itemName] += quantity
 	fmt.Printf("✅ Vous avez acheté %d x %s. Or restant : %d\n", quantity, itemName, joueur.Gold)
 }
 
-// ==================== FONCTION VILLE ====================
-func Ville(joueur *Character_class) {
-	merchant := NewMerchant("Mandragor", 1000)
+// Entrée dans le marché
+func Marche(joueur *Character_class) {
+	merchant := NewMerchant("Mandragor")
 
-	fmt.Println("👋 Bonjour, je suis", merchant.Name, "! Que puis-je faire pour toi ?")
+	fmt.Println("👋 Bonjour, je suis", merchant.name, "!")
+	fmt.Println("Que puis-je faire pour toi ?")
 	fmt.Println("1 - Potions")
-	fmt.Println("2 - Objets Magiques")
+	fmt.Println("2 - Baguette Magique")
+	fmt.Println("3 - Améliorations")
 
 	var choice int
 	fmt.Scanln(&choice)
 
-	// Récupère les objets de la catégorie choisie
-	items := merchant.DisplayCategory(choice)
+	items := merchant.DisplayCategory(choice, joueur)
 	if len(items) == 0 {
 		return
 	}
 
-	// Choix de l'objet par numéro
 	fmt.Println("Choisis un objet en entrant son numéro :")
 	var itemIndex int
 	fmt.Scanln(&itemIndex)
+
 	if itemIndex < 1 || itemIndex > len(items) {
 		fmt.Println("❌ Choix invalide.")
 		return
 	}
 	itemName := items[itemIndex-1]
 
-	// Choix de la quantité
-	fmt.Println("Combien veux-tu en acheter ? (max 5)")
-	var qty int
-	fmt.Scanln(&qty)
+	quantity := 1
+	if choice != 3 { // Pas de quantité pour les améliorations
+		fmt.Println("Combien veux-tu en acheter ? (max 5)")
+		fmt.Scanln(&quantity)
+	}
 
 	// Achat
-	Buy(joueur, merchant, choice, itemName, qty)
+	joueur.Buy(merchant, choice, itemName, quantity)
 
-	// Affiche l'inventaire du joueur
+	// Inventaire
 	fmt.Println("📦 Inventaire du joueur :")
-	for _, item := range joueur.Inventaire {
-		fmt.Println("-", item)
+	for item, q := range joueur.Inventaire {
+		fmt.Printf("- %s x%d\n", item, q)
 	}
+	fmt.Printf("💼 Limite d'inventaire : %d\n", joueur.InventoryLimit)
+	fmt.Printf("💰 Or restant : %d\n", joueur.Gold)
 }

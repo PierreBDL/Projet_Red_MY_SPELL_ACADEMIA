@@ -22,5 +22,5 @@ func Nettoyage(joueur *Character_class) {
   / \ |        PVs ❤️: %d / %d
 `,
 		joueur.Name, joueur.Gold, joueur.Class, joueur.Niveau, joueur.Pv, joueur.MaxPv)
-	fmt.Println("\n")
+	fmt.Println()
 }

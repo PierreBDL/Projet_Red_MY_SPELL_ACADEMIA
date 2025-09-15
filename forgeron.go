@@ -21,21 +21,11 @@ func (b *Blacksmith) CraftWand(joueur *Character_class) {
 	fmt.Println("- 400 or")
 
 	// Vérification des ressources
-	boisOK, plumeOK := false, false
-	for _, item := range joueur.Inventaire {
-		if item == "Bois de sureau" && !boisOK {
-			boisOK = true
-		}
-		if item == "Plume de phénix" && !plumeOK {
-			plumeOK = true
-		}
-	}
-
-	if !boisOK {
+	if joueur.Inventaire["Bois de sureau"] < 1 {
 		fmt.Println("❌ Il te manque un Bois de sureau.")
 		return
 	}
-	if !plumeOK {
+	if joueur.Inventaire["Plume de phénix"] < 1 {
 		fmt.Println("❌ Il te manque une Plume de phénix.")
 		return
 	}
@@ -45,24 +35,21 @@ func (b *Blacksmith) CraftWand(joueur *Character_class) {
 	}
 
 	// Retirer les ressources de l'inventaire
-	for i, item := range joueur.Inventaire {
-		if item == "Bois de sureau" {
-			joueur.Inventaire = append(joueur.Inventaire[:i], joueur.Inventaire[i+1:]...)
-			break
-		}
+	joueur.Inventaire["Bois de sureau"]--
+	if joueur.Inventaire["Bois de sureau"] == 0 {
+		delete(joueur.Inventaire, "Bois de sureau")
 	}
-	for i, item := range joueur.Inventaire {
-		if item == "Plume de phénix" {
-			joueur.Inventaire = append(joueur.Inventaire[:i], joueur.Inventaire[i+1:]...)
-			break
-		}
+
+	joueur.Inventaire["Plume de phénix"]--
+	if joueur.Inventaire["Plume de phénix"] == 0 {
+		delete(joueur.Inventaire, "Plume de phénix")
 	}
 
 	// Déduction de l'or
 	joueur.Gold -= 400
 
 	// Ajout de la baguette
-	joueur.Inventaire = append(joueur.Inventaire, "Baguette de sureau")
+	joueur.Inventaire["Baguette de sureau"]++
 	fmt.Println("✅ La baguette de sureau a été forgée et ajoutée à ton inventaire !")
 }
 
@@ -84,8 +71,8 @@ func Forge(joueur *Character_class) {
 
 	// Inventaire final
 	fmt.Println("\n📦 Inventaire du joueur :")
-	for _, item := range joueur.Inventaire {
-		fmt.Println("-", item)
+	for item, qty := range joueur.Inventaire {
+		fmt.Printf("- %s x%d\n", item, qty)
 	}
 	fmt.Printf("💰 Or restant : %d\n", joueur.Gold)
 }

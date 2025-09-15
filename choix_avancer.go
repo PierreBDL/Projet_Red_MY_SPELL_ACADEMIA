@@ -10,7 +10,7 @@ func Avancer() string {
 	rand.Seed(time.Now().UnixNano())
 
 	// Probabilité de tomber sur un ennemis
-	arrivee_ennemie_prob := 0.7
+	arrivee_ennemie_prob := 0.8
 
 	// Apparition ou non d'un ennemi
 	if rand.Float64() < arrivee_ennemie_prob {
