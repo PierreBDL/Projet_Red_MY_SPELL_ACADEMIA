@@ -20,7 +20,7 @@ func Nettoyage(joueur *Character_class) {
   /|\ |        Classe : %s
  / | \|        Niveau: %d
   / \ |        PVs ❤️: %d / %d
-`,
+\n`,
 		joueur.Name, joueur.Gold, joueur.Class, joueur.Niveau, joueur.Pv, joueur.MaxPv)
 
 }

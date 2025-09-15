@@ -133,8 +133,7 @@ func main() {
 				}
 			case 2:
 				MSA.Nettoyage(&caracter)
-				fmt.Println("\nVous entrez dans la ville de Musutafu !")
-				MSA.Ville(&caracter)
+				MSA.Entree_ville(&caracter)
 			case 3:
 				running = false
 				break
