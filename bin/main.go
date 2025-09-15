@@ -44,11 +44,12 @@ func main() {
 
 	// Choix de la classe du personnage
 	choix_classe := 0
-	fmt.Println("\nQue voulez-vous être\n")
+	fmt.Println("\nQue voulez-vous être ?\n")
 	fmt.Println("1] Sorcier")
 	fmt.Println("2] Alchimiste")
 	fmt.Print("Quel est votre choix ? ")
 	fmt.Scan(&choix_classe)
+	fmt.Print("")
 
 	// Variable de classe
 	var caracter MSA.Character_class
@@ -91,7 +92,7 @@ func main() {
 		if tour == 1 {
 			fmt.Println("\nVous débutez votre aventure dans le monde de la magie !")
 			fmt.Println("\nDébut du tutoriel")
-			//MSA.Tutoriel(&caracter)
+			MSA.Tutoriel(&caracter)
 		}
 		// toujours vérifier si le joueur est mort
 		if caracter.Pv <= 0 {
@@ -109,6 +110,7 @@ func main() {
 			fmt.Println("3] Quitter le jeu")
 			fmt.Print("Quel est votre choix ? ")
 			fmt.Scan(&choix)
+			fmt.Print("")
 
 			// Annalyse du choix
 			for choix < 1 || choix > 3 {

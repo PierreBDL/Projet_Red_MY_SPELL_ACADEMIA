@@ -5,6 +5,8 @@ import (
 )
 
 func Entree_ville(joueur *Character_class) {
+	Nettoyage(joueur)
+
 	// Le reste des tours
 	choix_ville := 0
 	fmt.Println("\nVous entrez dans la ville de Musutafu !\n")
@@ -14,6 +16,7 @@ func Entree_ville(joueur *Character_class) {
 	fmt.Println("4] 🚶🪧  Quitter la ville")
 	fmt.Print("Quel est votre choix ? ")
 	fmt.Scan(&choix_ville)
+	fmt.Print("")
 
 	// Annalyse du choix
 	for choix_ville != 1 && choix_ville != 2 && choix_ville != 3 && choix_ville != 3 {
@@ -21,10 +24,10 @@ func Entree_ville(joueur *Character_class) {
 		fmt.Print("\033[A\033[2K") // Remonte et efface les dernières lignes
 		fmt.Print("Quel est votre choix ? ")
 		fmt.Scan(&choix_ville)
+		fmt.Print("")
 	}
 	switch choix_ville {
 	case 1:
-		Nettoyage(joueur)
 		Marche(joueur)
 	case 2:
 		Nettoyage(joueur)

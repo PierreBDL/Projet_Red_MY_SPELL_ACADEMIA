@@ -3,7 +3,7 @@ package MSA
 import "fmt"
 
 func Nettoyage(joueur *Character_class) {
-	for i := 0; i < 90; i++ { // 50 lignes nettoyées
+	for i := 0; i < 90; i++ { // 90 lignes nettoyées
 		fmt.Print("\033[A\033[2K")
 	}
 
