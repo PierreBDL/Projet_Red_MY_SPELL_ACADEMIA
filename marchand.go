@@ -13,13 +13,6 @@ type Merchant struct {
 	armors    map[string]int
 }
 
-type Player struct {
-	inventory      map[string]int
-	gold           int
-	inventoryLimit int
-	upgradesBought int
-}
-
 func NewMerchant(name string, gold int) *Merchant {
 	return &Merchant{
 		name: name,
@@ -42,15 +35,6 @@ func NewMerchant(name string, gold int) *Merchant {
 			"poudre_de_pierre_lunaire": 50,
 			"perle_d_ame": 50,
 		},
-	}
-}
-
-func NewPlayer(gold int) *Player {
-	return &Player{
-		inventory:      make(map[string]int),
-		gold:           gold,
-		inventoryLimit: 10,
-		upgradesBought: 0,
 	}
 }
 
