@@ -80,3 +80,16 @@ func InitEnnemi() Character_class {
 		Niveau:  1,
 	}
 }
+
+func TutoEnnemi() Character_class {
+	return Character_class{
+		Name:    "Slime d'entraînement",
+		Class:   "Il est consentant, je vous jure",
+		Pv:      30,
+		MaxPv:   30,
+		Attaque: 50,
+		Defence: 2,
+		Gold:    0,
+		Niveau:  1,
+	}
+}

@@ -87,9 +87,11 @@ func main() {
 
 	// Boucle infinie
 	for running == true {
-		// 1er tour : affichage du message d'accueil
+		// 1er tour : affichage du message d'accueil et tutoriel
 		if tour == 1 {
 			fmt.Println("\nVous débutez votre aventure dans le monde de la magie !")
+			fmt.Println("\nDébut du tutoriel")
+			MSA.Tutoriel(&caracter)
 		}
 		// toujours vérifier si le joueur est mort
 		if caracter.Pv <= 0 {

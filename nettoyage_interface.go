@@ -16,10 +16,10 @@ func Nettoyage(joueur *Character_class) {
 
 	// Si le personnage est fait, on affiche sa fiche de stats
 	fmt.Printf(`
-   o  ◊        Nom : %s      	Argent: %d G
+   o  ◊        Nom : %s      	Argent 💰: %d G
   /|\ |        Classe : %s
  / | \|        Niveau: %d
-  / \ |        PV: %d / %d
+  / \ |        PVs ❤️: %d / %d
 `,
 		joueur.Name, joueur.Gold, joueur.Class, joueur.Niveau, joueur.Pv, joueur.MaxPv)
 

@@ -12,21 +12,21 @@ func Combat(joueur *Character_class, ennemie *Character_class) {
 		Nettoyage(joueur)
 
 		// Graphisme
-		fmt.Println("\n\n 	  o ◊ 		   o  ")
+		fmt.Println("\n\n 	  o ◊ 		  o  ")
 		fmt.Println(" 	 /|\\|		 \\/|\\")
 		fmt.Println(" 	 / \\		  / \\")
 		// Affichage des stats
 		fmt.Println("        Joueur	       ", ennemie.Name)
-		fmt.Println("PVs:  ", joueur.Pv, "/", joueur.MaxPv, "      ", ennemie.Pv, "/", ennemie.MaxPv)
-		fmt.Println("Atq:  	 ", joueur.Attaque, "	 	 ", ennemie.Attaque)
-		fmt.Println("Def:	 ", joueur.Defence, "		 ", ennemie.Defence, "\n")
+		fmt.Println("❤️:  ", joueur.Pv, "/", joueur.MaxPv, "   		   ", ennemie.Pv, "/", ennemie.MaxPv)
+		fmt.Println("🗡️:  	 ", joueur.Attaque, "	 		 ", ennemie.Attaque)
+		fmt.Println("🛡️:	 ", joueur.Defence, "			 ", ennemie.Defence, "\n")
 
 		// Choix de l'attaque
 		choix_attaque := 0
 		println("Un", ennemie.Name, "approche! Faîtes attention")
-		fmt.Println("1] Attaquer")
-		fmt.Println("2] Regarder dans l'inventaire")
-		fmt.Println("3] Fuir")
+		fmt.Println("1] 🗡️  Attaquer")
+		fmt.Println("2] 📦 Regarder dans l'inventaire")
+		fmt.Println("3] 🕊️  Fuir")
 		fmt.Print("Quel est votre choix ? ")
 		fmt.Scan(&choix_attaque)
 
@@ -61,9 +61,9 @@ func Combat(joueur *Character_class, ennemie *Character_class) {
 				fmt.Println(" 	 / \\		  / \\")
 				// Affichage des stats
 				fmt.Println("        Joueur	       ", ennemie.Name)
-				fmt.Println("PVs:  ", joueur.Pv, "/", joueur.MaxPv, "      ", ennemie.Pv, "/", ennemie.MaxPv)
-				fmt.Println("Atq:  	 ", joueur.Attaque, "	 	 ", ennemie.Attaque)
-				fmt.Println("Def:	 ", joueur.Defence, "		 ", ennemie.Defence, "\n")
+				fmt.Println("❤️ :  ", joueur.Pv, "/", joueur.MaxPv, "      ", ennemie.Pv, "/", ennemie.MaxPv)
+				fmt.Println("🗡️ :  	 ", joueur.Attaque, "	 	 ", ennemie.Attaque)
+				fmt.Println("🛡️ :	 ", joueur.Defence, "		 ", ennemie.Defence, "\n")
 				fmt.Println("🎉 Félicitation, vous gagnez", ennemie.Gold, "Or et", ennemie.Niveau, "niveau(x)!")
 
 				// Ajout des récompenses (Or, expérience et vie)
@@ -129,9 +129,9 @@ func Combat(joueur *Character_class, ennemie *Character_class) {
 		default:
 			fmt.Println("Choix invalide")
 			println("Un", ennemie.Name, "approche! Faîtes attention")
-			fmt.Println("1] Attaquer")
-			fmt.Println("2] Regarder dans l'inventaire")
-			fmt.Println("3] Fuir")
+			fmt.Println("1] 🗡️  Attaquer")
+			fmt.Println("2] 📦 Regarder dans l'inventaire")
+			fmt.Println("3] 🕊️  Fuir")
 			fmt.Print("Quel est votre choix ? ")
 			fmt.Scan(&choix_attaque)
 		}
