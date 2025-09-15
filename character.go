@@ -21,7 +21,7 @@ func InitCharacter(nom string, classe int) Character_class {
 			MaxPv:      100,
 			Attaque:    20,
 			Defence:    5,
-			Gold:       100,
+			Gold:       200,
 			Niveau:     1,
 			Inventaire: []string{"Potion de soin", "Potion de soin", "Potion de soin", "Potion de soin"},
 		}
@@ -34,7 +34,7 @@ func InitCharacter(nom string, classe int) Character_class {
 			MaxPv:      80,
 			Attaque:    30,
 			Defence:    7,
-			Gold:       100,
+			Gold:       200,
 			Niveau:     1,
 			Inventaire: []string{"Potion de soin", "Potion de soin", "Potion de soin", "Potion de soin"},
 		}

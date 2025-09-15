@@ -91,7 +91,7 @@ func main() {
 		if tour == 1 {
 			fmt.Println("\nVous débutez votre aventure dans le monde de la magie !")
 			fmt.Println("\nDébut du tutoriel")
-			MSA.Tutoriel(&caracter)
+			//MSA.Tutoriel(&caracter)
 		}
 		// toujours vérifier si le joueur est mort
 		if caracter.Pv <= 0 {
@@ -134,6 +134,7 @@ func main() {
 			case 2:
 				MSA.Nettoyage(&caracter)
 				fmt.Println("\nVous entrez dans la ville de Musutafu !")
+				MSA.Ville(&caracter)
 			case 3:
 				running = false
 				break
