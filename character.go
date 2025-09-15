@@ -68,16 +68,40 @@ func InitCharacter(nom string, classe int) Character_class {
 	}
 }
 
-func InitEnnemi() Character_class {
+func InitEnnemi(monstre string) Character_class {
+	if monstre == "gobelin" {
+		return Character_class{
+			Name:    "Gobelin",
+			Class:   "Monstre",
+			Pv:      50,
+			MaxPv:   50,
+			Attaque: 10,
+			Defence: 5,
+			Gold:    10, // Récompense
+			Niveau:  1,
+		}
+	}
+	if monstre == "boss" {
+		return Character_class{
+			Name:    "Boss",
+			Class:   "Monstre",
+			Pv:      150,
+			MaxPv:   150,
+			Attaque: 50,
+			Defence: 5,
+			Gold:    40, // Récompense
+			Niveau:  3,
+		}
+	}
 	return Character_class{
-		Name:    "Gobelin",
+		Name:    "Orc",
 		Class:   "Monstre",
-		Pv:      50,
-		MaxPv:   50,
-		Attaque: 10,
+		Pv:      70,
+		MaxPv:   70,
+		Attaque: 20,
 		Defence: 5,
-		Gold:    10, // Récompense
-		Niveau:  1,
+		Gold:    30, // Récompense
+		Niveau:  2,
 	}
 }
 

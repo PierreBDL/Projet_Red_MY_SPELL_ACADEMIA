@@ -26,7 +26,8 @@ func Entree_ville(joueur *Character_class) {
 		Nettoyage(joueur)
 		Ville(joueur)
 	case 2:
-		break
+		Nettoyage(joueur)
+		Forge(joueur)
 	case 3:
 		return
 	default:

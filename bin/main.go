@@ -122,10 +122,19 @@ func main() {
 				MSA.Nettoyage(&caracter)
 				// Avancé du tour
 				tour++
-				// Probabilité d'un ennemi
-				if MSA.Avancer() == true {
+				// Choix de l'ennemie
+				ennemie := MSA.Avancer()
+				if ennemie == "gobelin" {
 					// Faire apparaître l'ennemi
-					ennemie := MSA.InitEnnemi()
+					ennemie := MSA.InitEnnemi("gobelin")
+					// S'il y a un ennemi
+					if ennemie.Name != "" {
+						MSA.Combat(&caracter, &ennemie)
+					}
+				}
+				if ennemie == "boss" {
+					// Faire apparaître l'ennemi
+					ennemie := MSA.InitEnnemi("boss")
 					// S'il y a un ennemi
 					if ennemie.Name != "" {
 						MSA.Combat(&caracter, &ennemie)
