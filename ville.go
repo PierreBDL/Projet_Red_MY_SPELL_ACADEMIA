@@ -7,15 +7,19 @@ import (
 func Entree_ville(joueur *Character_class) {
 	Nettoyage(joueur)
 
+	fmt.Println("╔════════════════════════════════════════════════════════════════╗")
+	fmt.Println("║                    🏰 VILLE DE MUSUTAFU 🏰                     ║")
+	fmt.Println("╠════════════════════════════════════════════════════════════════╣")
+	fmt.Println("║                                                                ║")
+	fmt.Println("║    🏪 1] 🤝 Marché          🏠 3] 🛌 Auberge (10G/nuit)        ║")
+	fmt.Println("║    ⚒️  2] ⚒️  Forge           🎯 4] 🎯 Terrain d'entraînement    ║")
+	fmt.Println("║               5] 🚪🚶 Quitter la ville                         ║")
+	fmt.Println("║                                                                ║")
+	fmt.Println("╚════════════════════════════════════════════════════════════════╝")
+	fmt.Print("➤ Votre choix : ")
+
 	// Le reste des tours
 	choix_ville := 0
-	fmt.Println("\nVous entrez dans la ville de Musutafu !\n")
-	fmt.Println("1] 🤝 Marché")
-	fmt.Println("2] ⚒️  Forge")
-	fmt.Println("3] 🛌 Auberge (10G/nuit)")
-	fmt.Println("4] 🎯  Terrain d'entraînement")
-	fmt.Println("5] 🚶🪧  Quitter la ville")
-	fmt.Print("Quel est votre choix ? ")
 	fmt.Scan(&choix_ville)
 	fmt.Print("")
 

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	// Atoi
 	"strconv"
+	"strings"
 )
 
 func Combat(joueur *Character_class, ennemie *Character_class, tour int) int {
@@ -12,18 +13,20 @@ func Combat(joueur *Character_class, ennemie *Character_class, tour int) int {
 	for ennemie.Pv > 0 && joueur.Pv > 0 {
 		// Nettoyage de la console
 		Nettoyage(joueur)
+		Nettoyage(joueur)
 
-		// Graphisme
-		fmt.Println("\n\n 	  o ◊ 		  o  ")
-		fmt.Println(" 	 /|\\|		 \\/|\\")
-		fmt.Println(" 	 / \\		  / \\")
-		// Affichage des stats
-		fmt.Println("        Joueur	       ", ennemie.Name)
-		fmt.Println("❤️:  ", joueur.Pv, "/", joueur.MaxPv, "   		   ", ennemie.Pv, "/", ennemie.MaxPv)
-		fmt.Println("🗡️:  	 ", joueur.Attaque, "	 		 ", ennemie.Attaque)
-		fmt.Println("🛡️:	 ", joueur.Defence, "			 ", ennemie.Defence, "\n")
-
-		fmt.Println("\nVous êtes au tour", tour, "\n")
+		// Graphisme amélioré
+		fmt.Println("\n╔════════════════════════════════════════════════════════════════╗")
+		fmt.Println("║                        ⚔️  COMBAT  ⚔️                            ║")
+		fmt.Println("╠════════════════════════════════════════════════════════════════╣")
+		fmt.Printf("║  👤 %-15s                    🔥 %-15s      ║\n", "JOUEUR", strings.ToUpper(ennemie.Name))
+		fmt.Printf("║  ❤️  %3d/%-3d                           ❤️  %3d/%-3d               ║\n",
+			joueur.Pv, joueur.MaxPv, ennemie.Pv, ennemie.MaxPv)
+		fmt.Printf("║  ⚔️  %-3d                               ⚔️  %-3d           	 ║\n",
+			joueur.Attaque, ennemie.Attaque)
+		fmt.Printf("║  🛡️  %-3d                               🛡️  %-3d           	 ║\n",
+			joueur.Defence, ennemie.Defence)
+		fmt.Println("╚════════════════════════════════════════════════════════════════╝")
 
 		// Choix de l'attaque
 		choix_attaque := 0
@@ -157,16 +160,20 @@ func Combat(joueur *Character_class, ennemie *Character_class, tour int) int {
 				ennemie.Pv = 0
 				// Nettoyage de la console
 				Nettoyage(joueur)
+				Nettoyage(joueur)
 
 				// Graphisme
-				fmt.Println("\n\n 	  o ◊ 		   o  ")
-				fmt.Println(" 	 /|\\|		 \\/|\\")
-				fmt.Println(" 	 / \\		  / \\")
-				// Affichage des stats
-				fmt.Println("        Joueur	       ", ennemie.Name)
-				fmt.Println("❤️ :  ", joueur.Pv, "/", joueur.MaxPv, "      ", ennemie.Pv, "/", ennemie.MaxPv)
-				fmt.Println("🗡️ :  	 ", joueur.Attaque, "	 	 ", ennemie.Attaque)
-				fmt.Println("🛡️ :	 ", joueur.Defence, "		 ", ennemie.Defence, "\n")
+				fmt.Println("\n╔════════════════════════════════════════════════════════════════╗")
+				fmt.Println("║                        ⚔️  COMBAT  ⚔️                            ║")
+				fmt.Println("╠════════════════════════════════════════════════════════════════╣")
+				fmt.Printf("║  👤 %-15s                    🔥 %-15s      ║\n", "JOUEUR", strings.ToUpper(ennemie.Name))
+				fmt.Printf("║  ❤️  %3d/%-3d                           ❤️  %3d/%-3d               ║\n",
+					joueur.Pv, joueur.MaxPv, ennemie.Pv, ennemie.MaxPv)
+				fmt.Printf("║  ⚔️  %-3d                               ⚔️  %-3d           	 ║\n",
+					joueur.Attaque, ennemie.Attaque)
+				fmt.Printf("║  🛡️  %-3d                               🛡️  %-3d           	 ║\n",
+					joueur.Defence, ennemie.Defence)
+				fmt.Println("╚════════════════════════════════════════════════════════════════╝")
 				fmt.Println("🎉 Félicitation, vous gagnez", ennemie.Gold, "Or et", ennemie.Niveau, "niveau(x)!")
 
 				// Ajout des récompenses (Or, expérience et vie)
@@ -179,31 +186,39 @@ func Combat(joueur *Character_class, ennemie *Character_class, tour int) int {
 			} else if joueur.Pv <= 0 {
 				// Nettoyage de la console
 				Nettoyage(joueur)
+				Nettoyage(joueur)
 
 				// Graphisme
-				fmt.Println("\n\n 	  o ◊ 		   o  ")
-				fmt.Println(" 	 /|\\|		 \\/|\\")
-				fmt.Println(" 	 / \\		  / \\")
-				// Affichage des stats
-				fmt.Println("        Joueur	       ", ennemie.Name)
-				fmt.Println("PVs:  ", joueur.Pv, "/", joueur.MaxPv, "      ", ennemie.Pv, "/", ennemie.MaxPv)
-				fmt.Println("Atq:  	 ", joueur.Attaque, "	 	 ", ennemie.Attaque)
-				fmt.Println("Def:	 ", joueur.Defence, "		 ", ennemie.Defence, "\n")
+				fmt.Println("\n╔════════════════════════════════════════════════════════════════╗")
+				fmt.Println("║                        ⚔️  COMBAT  ⚔️                            ║")
+				fmt.Println("╠════════════════════════════════════════════════════════════════╣")
+				fmt.Printf("║  👤 %-15s                    🔥 %-15s      ║\n", "JOUEUR", strings.ToUpper(ennemie.Name))
+				fmt.Printf("║  ❤️  %3d/%-3d                           ❤️  %3d/%-3d               ║\n",
+					joueur.Pv, joueur.MaxPv, ennemie.Pv, ennemie.MaxPv)
+				fmt.Printf("║  ⚔️  %-3d                               ⚔️  %-3d           	 ║\n",
+					joueur.Attaque, ennemie.Attaque)
+				fmt.Printf("║  🛡️  %-3d                               🛡️  %-3d           	 ║\n",
+					joueur.Defence, ennemie.Defence)
+				fmt.Println("╚════════════════════════════════════════════════════════════════╝")
 				// Revoi au menu où se trouve la gestion de la mort
 				return tour
 			} else if joueur.Pv == 0 && ennemie.Pv == 0 {
 				// Nettoyage de la console
 				Nettoyage(joueur)
+				Nettoyage(joueur)
 
 				// Graphisme
-				fmt.Println("\n\n 	  o ◊ 		   o  ")
-				fmt.Println(" 	 /|\\|		 \\/|\\")
-				fmt.Println(" 	 / \\		  / \\")
-				// Affichage des stats
-				fmt.Println("        Joueur	       ", ennemie.Name)
-				fmt.Println("PVs:  ", joueur.Pv, "/", joueur.MaxPv, "      ", ennemie.Pv, "/", ennemie.MaxPv)
-				fmt.Println("Atq:  	 ", joueur.Attaque, "	 	 ", ennemie.Attaque)
-				fmt.Println("Def:	 ", joueur.Defence, "		 ", ennemie.Defence, "\n")
+				fmt.Println("\n╔════════════════════════════════════════════════════════════════╗")
+				fmt.Println("║                        ⚔️  COMBAT  ⚔️                            ║")
+				fmt.Println("╠════════════════════════════════════════════════════════════════╣")
+				fmt.Printf("║  👤 %-15s                    🔥 %-15s      ║\n", "JOUEUR", strings.ToUpper(ennemie.Name))
+				fmt.Printf("║  ❤️  %3d/%-3d                           ❤️  %3d/%-3d               ║\n",
+					joueur.Pv, joueur.MaxPv, ennemie.Pv, ennemie.MaxPv)
+				fmt.Printf("║  ⚔️  %-3d                               ⚔️  %-3d           	 ║\n",
+					joueur.Attaque, ennemie.Attaque)
+				fmt.Printf("║  🛡️  %-3d                               🛡️  %-3d           	 ║\n",
+					joueur.Defence, ennemie.Defence)
+				fmt.Println("╚════════════════════════════════════════════════════════════════╝")
 				// Revoi au menu où se trouve la gestion de la mort
 				return tour
 			}

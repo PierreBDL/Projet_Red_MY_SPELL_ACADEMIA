@@ -2,6 +2,7 @@ package MSA
 
 import (
 	"fmt"
+	"strings"
 )
 
 func Tutoriel(joueur *Character_class, tour int) int {
@@ -14,16 +15,22 @@ func Tutoriel(joueur *Character_class, tour int) int {
 
 	ennemie := TutoEnnemi()
 
+	// Nettoyage de la console
+	Nettoyage(joueur)
+	Nettoyage(joueur)
+
 	// Arrivée de l'ennemi
-	fmt.Println("Reprenons les bases !")
-	fmt.Println(" 	  o ◊ 			   o  ")
-	fmt.Println(" 	 /|\\|			 \\/|\\")
-	fmt.Println(" 	 / \\|			  / \\")
-	// Affichage des stats
-	fmt.Println("        Joueur	       ", ennemie.Name)
-	fmt.Println("❤️:   ", joueur.Pv, "/", joueur.MaxPv, "   	       ", ennemie.Pv, "/", ennemie.MaxPv)
-	fmt.Println("🗡️:   	", joueur.Attaque, "	 	 	 ", ennemie.Attaque)
-	fmt.Println("🛡️:   	", joueur.Defence, "		 	 ", ennemie.Defence, "\n")
+	fmt.Println("\n╔════════════════════════════════════════════════════════════════╗")
+	fmt.Println("║                        ⚔️  COMBAT ⚔️                             ║")
+	fmt.Println("╠════════════════════════════════════════════════════════════════╣")
+	fmt.Printf("║  👤 %-15s                   🔥 %-20s  ║\n", joueur.Name, strings.ToUpper(ennemie.Name))
+	fmt.Printf("║  ❤️  %3d/%-3d                           ❤️ %3d/%-3d                ║\n",
+		joueur.Pv, joueur.MaxPv, ennemie.Pv, ennemie.MaxPv)
+	fmt.Printf("║  ⚔️  %-3d                               ⚔️  %-3d           	 ║\n",
+		joueur.Attaque, ennemie.Attaque)
+	fmt.Printf("║  🛡️  %-3d                               🛡️  %-3d           	 ║\n",
+		joueur.Defence, ennemie.Defence)
+	fmt.Println("╚════════════════════════════════════════════════════════════════╝")
 
 	// Tuto attaque
 	choix_attaque := 0
@@ -139,17 +146,21 @@ func Tutoriel(joueur *Character_class, tour int) int {
 
 						Nettoyage(joueur)
 						Nettoyage(joueur)
+						Nettoyage(joueur)
 						// Tant que l'ennemie ou le joueur a des PVs
 
 						// Graphisme
-						fmt.Println("\n\n 	  o ◊ 		  o  ")
-						fmt.Println(" 	 /|\\|		 \\/|\\")
-						fmt.Println(" 	 / \\		  / \\")
-						// Affichage des stats
-						fmt.Println("        Joueur	       ", ennemie.Name)
-						fmt.Println("❤️:  ", joueur.Pv, "/", joueur.MaxPv, "   		   ", ennemie.Pv, "/", ennemie.MaxPv)
-						fmt.Println("🗡️:  	 ", joueur.Attaque, "	 		 ", ennemie.Attaque)
-						fmt.Println("🛡️:	 ", joueur.Defence, "			 ", ennemie.Defence, "\n")
+						fmt.Println("\n╔════════════════════════════════════════════════════════════════╗")
+						fmt.Println("║                        ⚔️  COMBAT ⚔️                             ║")
+						fmt.Println("╠════════════════════════════════════════════════════════════════╣")
+						fmt.Printf("║  👤 %-15s                   🔥 %-20s  ║\n", joueur.Name, strings.ToUpper(ennemie.Name))
+						fmt.Printf("║  ❤️  %3d/%-3d                           ❤️ %3d/%-3d                ║\n",
+							joueur.Pv, joueur.MaxPv, ennemie.Pv, ennemie.MaxPv)
+						fmt.Printf("║  ⚔️  %-3d                               ⚔️  %-3d           	 ║\n",
+							joueur.Attaque, ennemie.Attaque)
+						fmt.Printf("║  🛡️  %-3d                               🛡️  %-3d           	 ║\n",
+							joueur.Defence, ennemie.Defence)
+						fmt.Println("╚════════════════════════════════════════════════════════════════╝")
 
 						// Choix de l'attaque
 						fmt.Println("\nVous êtes au tour", tour, "\n")
@@ -185,16 +196,21 @@ func Tutoriel(joueur *Character_class, tour int) int {
 								ennemie.Pv = 0
 								// Nettoyage de la console
 								Nettoyage(joueur)
+								Nettoyage(joueur)
+								Nettoyage(joueur)
 
 								// Graphisme
-								fmt.Println("\n\n 	  o ◊ 		   o  ")
-								fmt.Println(" 	 /|\\|		 \\/|\\")
-								fmt.Println(" 	 / \\		  / \\")
-								// Affichage des stats
-								fmt.Println("        Joueur	       ", ennemie.Name)
-								fmt.Println("❤️ :  ", joueur.Pv, "/", joueur.MaxPv, "      ", ennemie.Pv, "/", ennemie.MaxPv)
-								fmt.Println("🗡️ :  	 ", joueur.Attaque, "	 	 ", ennemie.Attaque)
-								fmt.Println("🛡️ :	 ", joueur.Defence, "		 ", ennemie.Defence, "\n")
+								fmt.Println("\n╔════════════════════════════════════════════════════════════════╗")
+								fmt.Println("║                        ⚔️  COMBAT ⚔️                             ║")
+								fmt.Println("╠════════════════════════════════════════════════════════════════╣")
+								fmt.Printf("║  👤 %-15s                   🔥 %-20s  ║\n", joueur.Name, strings.ToUpper(ennemie.Name))
+								fmt.Printf("║  ❤️  %3d/%-3d                           ❤️ %3d/%-3d                ║\n",
+									joueur.Pv, joueur.MaxPv, ennemie.Pv, ennemie.MaxPv)
+								fmt.Printf("║  ⚔️  %-3d                               ⚔️  %-3d           	 ║\n",
+									joueur.Attaque, ennemie.Attaque)
+								fmt.Printf("║  🛡️  %-3d                               🛡️  %-3d           	 ║\n",
+									joueur.Defence, ennemie.Defence)
+								fmt.Println("╚════════════════════════════════════════════════════════════════╝")
 
 								// Quitter le tuto
 								fmt.Println("Bravo ! Le tutoriel est fini !")

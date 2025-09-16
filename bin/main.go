@@ -102,17 +102,23 @@ func main() {
 
 		// Vérifier si on est toujours en jeu (si on est mort, running = false donc ne rien afficher)
 		if running {
-			// Le reste des tours
+			fmt.Println("╔════════════════════════════════════════════════════════════════╗")
+			fmt.Println("║                    🎮 MY SPELL ACADEMIA 🎮                     ║")
+			fmt.Println("╠════════════════════════════════════════════════════════════════╣")
+			fmt.Printf("║                        🕒 Tour %-3d                             ║\n", tour)
+			fmt.Println("║                                                                ║")
+			fmt.Println("║              ⏩ 1] Avancer dans l'aventure                     ║")
+			fmt.Println("║              🏙️  2] Aller en ville                              ║")
+			fmt.Println("║              🚪 3] Quitter le jeu                              ║")
+			fmt.Println("║                                                                ║")
+			fmt.Println("╚════════════════════════════════════════════════════════════════╝")
+			fmt.Print("➤ Que voulez-vous faire ? ")
+
+			// Annalyse du choix
 			choix := 0
-			fmt.Println("\nVous êtes au tour", tour, "que voulez vous faire ?\n")
-			fmt.Println("1] ⏩ Avancer")
-			fmt.Println("2] 🏙️  Aller en ville")
-			fmt.Println("3] Quitter le jeu")
-			fmt.Print("Quel est votre choix ? ")
 			fmt.Scan(&choix)
 			fmt.Print("")
 
-			// Annalyse du choix
 			for choix < 1 || choix > 3 {
 				fmt.Print("Choix invalide. Veuillez recommencer ")
 				fmt.Print("\033[A\033[2K") // Remonte et efface les dernières lignes
