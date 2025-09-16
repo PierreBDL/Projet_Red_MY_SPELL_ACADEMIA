@@ -46,13 +46,15 @@ func InitCharacter(nom string, classe int) Character_class {
 			Inventaire:     map[string]int{"Potion de soin": 4},
 			upgradesBought: 0,
 			InventoryLimit: 10,
+			// Sorts
+			Sorts: [][]string{{"🪄  Wingardium Leviosa !", "est envoyé loin et perd 10 PV.", "10"}, {"🔥 Incendio !", "est en feu et perd 15 PV.", "15"}},
 		}
 	}
 
 	if classe == 666 {
 		// Choix par défaut pour éviter les bugs
 		return Character_class{
-			Name:           "Harry Poter",
+			Name:           "Harry Potter",
 			Class:          "Sang mélé",
 			Pv:             150,
 			MaxPv:          150,
@@ -63,6 +65,8 @@ func InitCharacter(nom string, classe int) Character_class {
 			Inventaire:     map[string]int{"Potion de soin": 4},
 			upgradesBought: 0,
 			InventoryLimit: 10,
+			// Sorts
+			Sorts: [][]string{{"🪄  Wingardium Leviosa !", "est envoyé loin et perd 10 PV.", "10"}, {"🔥 Incendio !", "est en feu et perd 15 PV.", "15"}},
 		}
 	}
 
