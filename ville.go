@@ -13,13 +13,14 @@ func Entree_ville(joueur *Character_class) {
 	fmt.Println("1] 🤝 Marché")
 	fmt.Println("2] ⚒️  Forge")
 	fmt.Println("3] 🛌 Auberge (10G/nuit)")
-	fmt.Println("4] 🚶🪧  Quitter la ville")
+	fmt.Println("4] 🎯  Terrain d'entraînement")
+	fmt.Println("5] 🚶🪧  Quitter la ville")
 	fmt.Print("Quel est votre choix ? ")
 	fmt.Scan(&choix_ville)
 	fmt.Print("")
 
 	// Annalyse du choix
-	for choix_ville != 1 && choix_ville != 2 && choix_ville != 3 && choix_ville != 3 {
+	for choix_ville != 1 && choix_ville != 2 && choix_ville != 3 && choix_ville != 4 && choix_ville != 5 {
 		fmt.Print("Choix invalide. Veuillez recommencer ")
 		fmt.Print("\033[A\033[2K") // Remonte et efface les dernières lignes
 		fmt.Print("Quel est votre choix ? ")
@@ -50,6 +51,9 @@ func Entree_ville(joueur *Character_class) {
 		}
 
 	case 4:
+		Nettoyage(joueur)
+		Entrainement(joueur)
+	case 5:
 		return
 	default:
 		break

@@ -4,9 +4,9 @@ import (
 	"fmt"
 )
 
-func Tutoriel(joueur *Character_class, tour int) int {
+func Entrainement(joueur *Character_class) {
 	// Pitch du tutoriel
-	fmt.Println("Dans ce tutoriel, vous allez apprendre à mener un combat et à vous soigner !")
+	fmt.Println("Dans cet entraînement, vous allez apprendre à mener un combat et à vous soigner !")
 	// Pause
 	fmt.Println("Appuyez sur Entrée pour continuer...")
 	var pause string
@@ -30,17 +30,14 @@ func Tutoriel(joueur *Character_class, tour int) int {
 	attaque_faite := false
 
 	for choix_attaque != 1 {
-		fmt.Println("\nVous êtes au tour", tour, "\n")
 		fmt.Println("Attaquez !\n")
 		fmt.Println("1] 🗡️  Attaquer <--")
 		fmt.Println("2] 📦 Regarder dans l'inventaire")
-		fmt.Println("3] 🕊️  Fuir")
+		fmt.Println("3] 🕊️  Quittez le terrain d'entraînement")
 		fmt.Print("Quel est votre choix ? ")
 		fmt.Scan(&choix_attaque)
 
 		if choix_attaque == 1 {
-			// Tour + 1
-			tour++
 			// Attaque du joueur
 			ennemie.Pv -= (joueur.Attaque - ennemie.Defence)
 			fmt.Println("\nVous infligez", joueur.Attaque-ennemie.Defence, "dommages !")
@@ -55,6 +52,11 @@ func Tutoriel(joueur *Character_class, tour int) int {
 			attaque_faite = true
 		}
 
+		// Quitter
+		if choix_attaque == 3 {
+			return
+		}
+
 		if attaque_faite == true {
 			// Tuto soins
 			fmt.Println("L'ennemi vous a fais des dégats, il faut vous soigner !")
@@ -65,7 +67,6 @@ func Tutoriel(joueur *Character_class, tour int) int {
 
 			choix_soins := 0
 			for choix_soins != 2 {
-				fmt.Println("\nVous êtes au tour", tour, "\n")
 				fmt.Println("Soignez-vous !\n")
 				fmt.Println("1] 🗡️  Attaquer")
 				fmt.Println("2] 📦 Regarder dans l'inventaire <--")
@@ -74,9 +75,6 @@ func Tutoriel(joueur *Character_class, tour int) int {
 				fmt.Scan(&choix_soins)
 
 				if choix_soins == 2 {
-					// Tour + 1
-					tour++
-
 					accessInventory(joueur, 1)
 
 					// Utilisation des objets
@@ -107,20 +105,8 @@ func Tutoriel(joueur *Character_class, tour int) int {
 						}
 					case 2:
 						// Empêcher de quitter dans le tutoriel
-						fmt.Println("❌ Vous ne pouvez pas quitter le tutoriel, utilisez une potion de soin !")
-						// On relance la sélection
-						utilise := false
-						for !utilise {
-							var choix_inv int
-							println("Vous devez utiliser une potion de soin pour continuer !")
-							fmt.Println("1] Potion de soin")
-							fmt.Print("Quel est votre choix ? ")
-							fmt.Scan(&choix_inv)
-
-							if choix_inv == 1 {
-								utilise = utiliserObjetTuto(joueur, "Potion de soin")
-							}
-						}
+						fmt.Println("Vous quittez le terrain d'entraînement")
+						return
 					}
 
 					fmt.Println("")
@@ -134,9 +120,6 @@ func Tutoriel(joueur *Character_class, tour int) int {
 					ennemie.Attaque = 10
 					// Boucle pour vaincre
 					for ennemie.Pv > 0 {
-						// Tour + 1
-						tour++
-
 						Nettoyage(joueur)
 						Nettoyage(joueur)
 						// Tant que l'ennemie ou le joueur a des PVs
@@ -152,7 +135,6 @@ func Tutoriel(joueur *Character_class, tour int) int {
 						fmt.Println("🛡️:	 ", joueur.Defence, "			 ", ennemie.Defence, "\n")
 
 						// Choix de l'attaque
-						fmt.Println("\nVous êtes au tour", tour, "\n")
 						choix_attaque := 0
 						println("Un", ennemie.Name, "approche! Faîtes attention")
 						fmt.Println("1] 🗡️  Attaquer")
@@ -197,7 +179,7 @@ func Tutoriel(joueur *Character_class, tour int) int {
 								fmt.Println("🛡️ :	 ", joueur.Defence, "		 ", ennemie.Defence, "\n")
 
 								// Quitter le tuto
-								fmt.Println("Bravo ! Le tutoriel est fini !")
+								fmt.Println("Bravo ! L'entraînement est fini !")
 								fmt.Println("Appuyez sur Entrée pour continuer...")
 								var pause string
 								fmt.Scanln(&pause)
@@ -207,7 +189,7 @@ func Tutoriel(joueur *Character_class, tour int) int {
 								// Vie réinitialisée
 								joueur.Pv = joueur.MaxPv
 
-								return tour
+								return
 							}
 						case 2:
 							accessInventory(joueur, 1)
@@ -242,5 +224,4 @@ func Tutoriel(joueur *Character_class, tour int) int {
 			}
 		}
 	}
-	return tour
 }
