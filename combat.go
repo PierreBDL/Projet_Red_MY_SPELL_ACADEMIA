@@ -104,9 +104,10 @@ func Combat(joueur *Character_class, ennemie *Character_class, tour int) int {
 							// Tour + 1
 							tour++
 
-							// Attaque du joueur
+							// Attaque du joueur avec description du sort
 							ennemie.Pv -= (dommages)
-							fmt.Println("\nVous infligez", dommages, "dommages !")
+							fmt.Print("\nVous lancez", joueur.Sorts[0][0])
+							fmt.Println(ennemie.Name, "", joueur.Sorts[0][1]) // Description du sort
 							// Attaque de l'ennemis
 							joueur.Pv -= (ennemie.Attaque - joueur.Defence)
 							fmt.Println("Le", ennemie.Name, "vous inflige", ennemie.Attaque-joueur.Defence, "dommages !\n")
@@ -124,9 +125,10 @@ func Combat(joueur *Character_class, ennemie *Character_class, tour int) int {
 							// Tour + 1
 							tour++
 
-							// Attaque du joueur
+							// Attaque du joueur avec description du sort
 							ennemie.Pv -= (dommages)
-							fmt.Println("\nVous infligez", dommages, "dommages !")
+							fmt.Print("\nVous lancez", joueur.Sorts[1][0], "!")
+							fmt.Println(ennemie.Name, "", joueur.Sorts[1][1]) // Description du sort
 							// Attaque de l'ennemis
 							joueur.Pv -= (ennemie.Attaque - joueur.Defence)
 							fmt.Println("Le", ennemie.Name, "vous inflige", ennemie.Attaque-joueur.Defence, "dommages !\n")
