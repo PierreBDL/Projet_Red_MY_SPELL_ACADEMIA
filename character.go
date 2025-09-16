@@ -117,8 +117,8 @@ func TutoEnnemi() Character_class {
 	return Character_class{
 		Name:    "Slime d'entraînement",
 		Class:   "Il est consentant, je vous jure",
-		Pv:      30,
-		MaxPv:   30,
+		Pv:      70,
+		MaxPv:   70,
 		Attaque: 50,
 		Defence: 2,
 		Gold:    0,

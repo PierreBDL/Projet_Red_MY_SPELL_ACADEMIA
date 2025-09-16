@@ -92,7 +92,7 @@ func main() {
 		if tour == 1 {
 			fmt.Println("\nVous débutez votre aventure dans le monde de la magie !")
 			fmt.Println("\nDébut du tutoriel")
-			MSA.Tutoriel(&caracter)
+			tour = MSA.Tutoriel(&caracter, tour)
 		}
 		// toujours vérifier si le joueur est mort
 		if caracter.Pv <= 0 {
@@ -131,7 +131,7 @@ func main() {
 					ennemie := MSA.InitEnnemi("gobelin")
 					// S'il y a un ennemi
 					if ennemie.Name != "" {
-						MSA.Combat(&caracter, &ennemie)
+						tour = MSA.Combat(&caracter, &ennemie, tour)
 					}
 				}
 				if ennemie == "boss" {
@@ -139,7 +139,7 @@ func main() {
 					ennemie := MSA.InitEnnemi("boss")
 					// S'il y a un ennemi
 					if ennemie.Name != "" {
-						MSA.Combat(&caracter, &ennemie)
+						tour = MSA.Combat(&caracter, &ennemie, tour)
 					}
 				}
 			case 2:

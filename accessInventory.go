@@ -41,3 +41,28 @@ func utiliserObjet(joueur *Character_class, objet string) {
 		}
 	}
 }
+
+// Utiliser un objet
+func utiliserObjetTuto(joueur *Character_class, objet string) bool {
+	qty, ok := joueur.Inventaire[objet]
+	if !ok || qty == 0 {
+		fmt.Println(objet, "n'est pas dans votre inventaire")
+		return false
+	}
+
+	// Exemple pour une Potion de soin
+	if objet == "Potion de soin" {
+		if joueur.Inventaire["Potion de soin"] > 0 {
+			joueur.Pv += 50
+			if joueur.Pv > joueur.MaxPv {
+				joueur.Pv = joueur.MaxPv
+			}
+			joueur.Inventaire["Potion de soin"]-- // on enlève 1 potion
+			fmt.Println("Vous utilisez une Potion de soin ! PV :", joueur.Pv, "/", joueur.MaxPv)
+			return true
+		} else {
+			fmt.Println("❌ Vous n'avez pas de Potion de soin !")
+		}
+	}
+	return false
+}

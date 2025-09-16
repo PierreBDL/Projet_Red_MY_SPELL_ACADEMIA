@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func Combat(joueur *Character_class, ennemie *Character_class) {
+func Combat(joueur *Character_class, ennemie *Character_class, tour int) int {
 
 	// Tant que l'ennemie ou le joueur a des PVs
 	for ennemie.Pv > 0 && joueur.Pv > 0 {
@@ -20,6 +20,8 @@ func Combat(joueur *Character_class, ennemie *Character_class) {
 		fmt.Println("❤️:  ", joueur.Pv, "/", joueur.MaxPv, "   		   ", ennemie.Pv, "/", ennemie.MaxPv)
 		fmt.Println("🗡️:  	 ", joueur.Attaque, "	 		 ", ennemie.Attaque)
 		fmt.Println("🛡️:	 ", joueur.Defence, "			 ", ennemie.Defence, "\n")
+
+		fmt.Println("\nVous êtes au tour", tour, "\n")
 
 		// Choix de l'attaque
 		choix_attaque := 0
@@ -40,6 +42,9 @@ func Combat(joueur *Character_class, ennemie *Character_class) {
 		// Gestion du combat
 		switch choix_attaque {
 		case 1:
+			// Tour + 1
+			tour++
+
 			fmt.Print("\033[A\033[2K") // supprime la ligne attaque du joueur
 			fmt.Print("\033[A\033[2K") // supprime la ligne attaque de l'ennemi
 			// Attaque du joueur
@@ -71,7 +76,7 @@ func Combat(joueur *Character_class, ennemie *Character_class) {
 				joueur.Niveau += ennemie.Niveau
 
 				// Retour au menu
-				return
+				return tour
 
 			} else if joueur.Pv <= 0 {
 				// Nettoyage de la console
@@ -87,7 +92,7 @@ func Combat(joueur *Character_class, ennemie *Character_class) {
 				fmt.Println("Atq:  	 ", joueur.Attaque, "	 	 ", ennemie.Attaque)
 				fmt.Println("Def:	 ", joueur.Defence, "		 ", ennemie.Defence, "\n")
 				// Revoi au menu où se trouve la gestion de la mort
-				return
+				return tour
 			} else if joueur.Pv == 0 && ennemie.Pv == 0 {
 				// Nettoyage de la console
 				Nettoyage(joueur)
@@ -102,9 +107,12 @@ func Combat(joueur *Character_class, ennemie *Character_class) {
 				fmt.Println("Atq:  	 ", joueur.Attaque, "	 	 ", ennemie.Attaque)
 				fmt.Println("Def:	 ", joueur.Defence, "		 ", ennemie.Defence, "\n")
 				// Revoi au menu où se trouve la gestion de la mort
-				return
+				return tour
 			}
 		case 2:
+			// Tour + 1
+			tour++
+
 			accessInventory(joueur, 1)
 
 			// Utilisation des objets
@@ -124,8 +132,11 @@ func Combat(joueur *Character_class, ennemie *Character_class) {
 			}
 
 		case 3:
+			// Tour + 1
+			tour++
+
 			fmt.Println("Vous fuyez le combat !\n")
-			return
+			return tour
 		default:
 			fmt.Println("Choix invalide")
 			println("Un", ennemie.Name, "approche! Faîtes attention")
@@ -137,4 +148,5 @@ func Combat(joueur *Character_class, ennemie *Character_class) {
 		}
 
 	}
+	return tour
 }
