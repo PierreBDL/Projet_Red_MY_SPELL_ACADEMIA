@@ -2,6 +2,8 @@ package MSA
 
 import (
 	"fmt"
+	// Atoi
+	"strconv"
 )
 
 func Combat(joueur *Character_class, ennemie *Character_class, tour int) int {
@@ -42,17 +44,102 @@ func Combat(joueur *Character_class, ennemie *Character_class, tour int) int {
 		// Gestion du combat
 		switch choix_attaque {
 		case 1:
-			// Tour + 1
-			tour++
+			// Choisir le type de l'attaque
+			choix_type_attaque := 0
+			fmt.Println("1] 🗡️  Attaque à l'épée")
+			fmt.Println("2] 🪄  Lancer un sort")
+			fmt.Println("3] 🕊️  Retour")
+			fmt.Print("Quel est votre choix ? ")
+			fmt.Scan(&choix_type_attaque)
 
-			fmt.Print("\033[A\033[2K") // supprime la ligne attaque du joueur
-			fmt.Print("\033[A\033[2K") // supprime la ligne attaque de l'ennemi
-			// Attaque du joueur
-			ennemie.Pv -= (joueur.Attaque - ennemie.Defence)
-			println("\nVous infligez", joueur.Attaque-ennemie.Defence, "dommages !")
-			// Attaque de l'ennemis
-			joueur.Pv -= (ennemie.Attaque - joueur.Defence)
-			println("Le", ennemie.Name, "vous inflige", ennemie.Attaque-joueur.Defence, "dommages !\n")
+			// Mauvaise saisie
+			if choix_type_attaque != 1 && choix_type_attaque != 2 && choix_type_attaque != 3 {
+				fmt.Print("\033[A\033[A\033[A\033[A\033[2K")
+				// Choisir le type de l'attaque
+				choix_type_attaque := 0
+				fmt.Println("1] 🗡️  Attaque à l'épée")
+				fmt.Println("2] 🪄  Lancer un sort")
+				fmt.Println("3] 🕊️  Retour")
+				fmt.Print("Quel est votre choix ? ")
+				fmt.Scan(&choix_type_attaque)
+			} else {
+				if choix_type_attaque == 1 {
+					// Tour + 1
+					tour++
+
+					// Attaque du joueur
+					ennemie.Pv -= (joueur.Attaque - ennemie.Defence)
+					println("\nVous infligez", joueur.Attaque-ennemie.Defence, "dommages !")
+					// Attaque de l'ennemis
+					joueur.Pv -= (ennemie.Attaque - joueur.Defence)
+					println("Le", ennemie.Name, "vous inflige", ennemie.Attaque-joueur.Defence, "dommages !\n")
+				} else if choix_type_attaque == 2 {
+					// Choisir le type de l'attaque
+					choix_sort := 0
+					fmt.Println("\nChoississez votre sort :")
+					fmt.Println("1]", joueur.Sorts[0][0])
+					fmt.Println("2]", joueur.Sorts[1][0])
+					fmt.Println("3] 🕊️  Retour")
+					fmt.Print("Quel est votre choix ? ")
+					fmt.Scan(&choix_sort)
+
+					// Mauvaise saisie
+					if choix_sort != 1 && choix_sort != 2 && choix_sort != 3 {
+						fmt.Print("\033[A\033[A\033[A\033[A\033[2K")
+						// Choisir le type de l'attaque
+						choix_sort := 0
+						fmt.Println("1]", joueur.Sorts[0][0])
+						fmt.Println("2] ", joueur.Sorts[1][0])
+						fmt.Println("3] 🕊️  Retour")
+						fmt.Print("Quel est votre choix ? ")
+						fmt.Scan(&choix_sort)
+					} else {
+						if choix_sort == 1 {
+							// Conversion en int
+							dommages, err := strconv.Atoi(joueur.Sorts[0][2])
+							if err != nil {
+								fmt.Println("Erreur de conversion :", err)
+								dommages = 10 // ou autre valeur par défaut
+							}
+							// Tour + 1
+							tour++
+
+							// Attaque du joueur
+							ennemie.Pv -= (dommages)
+							fmt.Println("\nVous infligez", dommages, "dommages !")
+							// Attaque de l'ennemis
+							joueur.Pv -= (ennemie.Attaque - joueur.Defence)
+							fmt.Println("Le", ennemie.Name, "vous inflige", ennemie.Attaque-joueur.Defence, "dommages !\n")
+
+							// Pause pour permettre au joueur de lire
+							fmt.Print("Appuyez sur Entrée pour continuer...")
+							fmt.Scanln()
+						} else if choix_sort == 2 {
+							// Conversion en int
+							dommages, err := strconv.Atoi(joueur.Sorts[1][2])
+							if err != nil {
+								fmt.Println("Erreur de conversion :", err)
+								dommages = 15 // ou autre valeur par défaut
+							}
+							// Tour + 1
+							tour++
+
+							// Attaque du joueur
+							ennemie.Pv -= (dommages)
+							fmt.Println("\nVous infligez", dommages, "dommages !")
+							// Attaque de l'ennemis
+							joueur.Pv -= (ennemie.Attaque - joueur.Defence)
+							fmt.Println("Le", ennemie.Name, "vous inflige", ennemie.Attaque-joueur.Defence, "dommages !\n")
+
+							// Pause pour permettre au joueur de lire
+							fmt.Print("Appuyez sur Entrée pour continuer...")
+							fmt.Scanln()
+						} else if choix_sort == 3 {
+							break
+						}
+					}
+				}
+			}
 
 			// Si le joueur ou l'ennemie à zéro PVs
 			if ennemie.Pv <= 0 {

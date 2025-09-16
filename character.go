@@ -12,6 +12,7 @@ type Character_class struct {
 	Inventaire     map[string]int
 	upgradesBought int
 	InventoryLimit int
+	Sorts          [][]string
 }
 
 func InitCharacter(nom string, classe int) Character_class {
@@ -28,6 +29,8 @@ func InitCharacter(nom string, classe int) Character_class {
 			Inventaire:     map[string]int{"Potion de soin": 4},
 			upgradesBought: 0,
 			InventoryLimit: 10,
+			// Sorts
+			Sorts: [][]string{{"🪄  Wingardium Leviosa !", "est envoyé loin et perd 10 PV.", "10"}, {"🔥 Incendio !", "est en feu et perd 15 PV.", "15"}},
 		}
 	}
 	if classe == 2 {
