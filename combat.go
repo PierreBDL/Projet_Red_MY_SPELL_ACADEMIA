@@ -67,12 +67,21 @@ func Combat(joueur *Character_class, ennemie *Character_class, tour int) int {
 					// Tour + 1
 					tour++
 
-					// Attaque du joueur
-					ennemie.Pv -= (joueur.Attaque - ennemie.Defence)
-					println("\nVous infligez", joueur.Attaque-ennemie.Defence, "dommages !")
-					// Attaque de l'ennemis
-					joueur.Pv -= (ennemie.Attaque - joueur.Defence)
-					println("Le", ennemie.Name, "vous inflige", ennemie.Attaque-joueur.Defence, "dommages !\n")
+					// Attaque du joueur - éviter les dégâts négatifs
+					degats_joueur := joueur.Attaque - ennemie.Defence
+					if degats_joueur < 1 {
+						degats_joueur = 1 // Minimum 1 dégât
+					}
+					ennemie.Pv -= degats_joueur
+					fmt.Println("\nVous infligez", degats_joueur, "dommages !")
+
+					// Attaque de l'ennemi - éviter les dégâts négatifs
+					degats_ennemi := ennemie.Attaque - joueur.Defence
+					if degats_ennemi < 1 {
+						degats_ennemi = 1 // Minimum 1 dégât
+					}
+					joueur.Pv -= degats_ennemi
+					fmt.Println("Le", ennemie.Name, "vous inflige", degats_ennemi, "dommages !\n")
 				} else if choix_type_attaque == 2 {
 					// Choisir le type de l'attaque
 					choix_sort := 0
@@ -208,15 +217,45 @@ func Combat(joueur *Character_class, ennemie *Character_class, tour int) int {
 			inventaire_choix := 0
 			println("Utiliser un objet de l'inventaire ?")
 			fmt.Println("1] Potion de soin")
-			fmt.Println("2] Quitter")
+			fmt.Println("2] Potion de poison")
+			fmt.Println("3] Quitter")
 			fmt.Print("Quel est votre choix ? ")
 			fmt.Scan(&inventaire_choix)
+
+			for inventaire_choix != 1 && inventaire_choix != 2 && inventaire_choix != 3 {
+				fmt.Print("\033[A\033[A\033[A\033[A\033[2K")
+				// Utilisation des objets
+				inventaire_choix := 0
+				println("Utiliser un objet de l'inventaire ?")
+				fmt.Println("1] Potion de soin")
+				fmt.Println("2] Potion de poison")
+				fmt.Println("3] Quitter")
+				fmt.Print("Quel est votre choix ? ")
+				fmt.Scan(&inventaire_choix)
+			}
 
 			// Choix
 			switch inventaire_choix {
 			case 1:
-				utiliserObjet(joueur, "Potion de soin")
+				utiliserObjet(joueur, ennemie, "Potion de soin")
+				// Attaque de l'ennemi après utilisation de la potion
+				joueur.Pv -= (ennemie.Attaque - joueur.Defence)
+				fmt.Println("Le", ennemie.Name, "vous inflige", ennemie.Attaque-joueur.Defence, "dommages !\n")
+
+				// Pause pour permettre au joueur de lire
+				fmt.Print("Appuyez sur Entrée pour continuer...")
+				fmt.Scanln()
 			case 2:
+				utiliserObjet(joueur, ennemie, "Potion de poison")
+				fmt.Println("Vous infligez 30 dommages de poison !")
+				// L'ennemi attaque après que vous ayez utilisé la potion de poison
+				joueur.Pv -= (ennemie.Attaque - joueur.Defence)
+				fmt.Println("Le", ennemie.Name, "vous inflige", ennemie.Attaque-joueur.Defence, "dommages !\n")
+
+				// Pause pour permettre au joueur de lire
+				fmt.Print("Appuyez sur Entrée pour continuer...")
+				fmt.Scanln()
+			case 3:
 				break
 			}
 

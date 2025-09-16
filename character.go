@@ -12,7 +12,9 @@ type Character_class struct {
 	Inventaire     map[string]int
 	upgradesBought int
 	InventoryLimit int
-	Sorts          [][]string
+	Sorts          [][]string // Nom, description, dégats
+	Equipement     [][]string // Casque, Armure, Jambières
+	Armes          []string   // Arme
 }
 
 func InitCharacter(nom string, classe int) Character_class {
@@ -26,11 +28,14 @@ func InitCharacter(nom string, classe int) Character_class {
 			Defence:        5,
 			Gold:           200,
 			Niveau:         1,
-			Inventaire:     map[string]int{"Potion de soin": 4},
+			Inventaire:     map[string]int{"Potion de soin": 4, "Potion de poison": 2},
 			upgradesBought: 0,
 			InventoryLimit: 10,
 			// Sorts
 			Sorts: [][]string{{"🪄  Wingardium Leviosa !", "est envoyé loin et perd 10 PV.", "10"}, {"🔥 Incendio !", "est en feu et perd 15 PV.", "15"}},
+			// Tenue + Arme
+			Equipement: make([][]string, 3), // Casque, Armure, Jambières
+			Armes:      make([]string, 1),   // Arme
 		}
 	}
 	if classe == 2 {
@@ -43,7 +48,7 @@ func InitCharacter(nom string, classe int) Character_class {
 			Defence:        7,
 			Gold:           200,
 			Niveau:         1,
-			Inventaire:     map[string]int{"Potion de soin": 4},
+			Inventaire:     map[string]int{"Potion de soin": 4, "Potion de poison": 2},
 			upgradesBought: 0,
 			InventoryLimit: 10,
 			// Sorts
@@ -62,7 +67,7 @@ func InitCharacter(nom string, classe int) Character_class {
 			Defence:        25,
 			Gold:           1000,
 			Niveau:         1,
-			Inventaire:     map[string]int{"Potion de soin": 4},
+			Inventaire:     map[string]int{"Potion de soin": 4, "Potion de poison": 2},
 			upgradesBought: 0,
 			InventoryLimit: 10,
 			// Sorts

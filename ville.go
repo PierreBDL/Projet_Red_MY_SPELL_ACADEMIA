@@ -29,7 +29,7 @@ func Entree_ville(joueur *Character_class) {
 	}
 	switch choix_ville {
 	case 1:
-		Marche(joueur)
+		Marchand(joueur)
 	case 2:
 		Nettoyage(joueur)
 		Forge(joueur)

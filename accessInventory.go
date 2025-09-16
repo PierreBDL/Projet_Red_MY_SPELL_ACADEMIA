@@ -20,7 +20,7 @@ func accessInventory(joueur *Character_class, action int) {
 }
 
 // Utiliser un objet
-func utiliserObjet(joueur *Character_class, objet string) {
+func utiliserObjet(joueur, ennemie *Character_class, objet string) {
 	qty, ok := joueur.Inventaire[objet]
 	if !ok || qty == 0 {
 		fmt.Println(objet, "n'est pas dans votre inventaire")
@@ -38,6 +38,19 @@ func utiliserObjet(joueur *Character_class, objet string) {
 			fmt.Println("Vous utilisez une Potion de soin ! PV :", joueur.Pv, "/", joueur.MaxPv)
 		} else {
 			fmt.Println("❌ Vous n'avez pas de Potion de soin !")
+		}
+	}
+	// Utiliser Potion de poison
+	if objet == "Potion de poison" {
+		if joueur.Inventaire["Potion de poison"] > 0 {
+			ennemie.Pv -= 30
+			if ennemie.Pv < 0 {
+				ennemie.Pv = 0
+			}
+			joueur.Inventaire["Potion de poison"]-- // on enlève 1 potion
+			fmt.Println("Vous utilisez une Potion de poison ! PV ennemi :", ennemie.Pv, "/", ennemie.MaxPv)
+		} else {
+			fmt.Println("❌ Vous n'avez pas de Potion de poison !")
 		}
 	}
 }
