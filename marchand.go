@@ -5,12 +5,12 @@ import (
 )
 
 type Merchant struct {
-	name      string
-	gold      int
-	potions   map[string]int
-	items     map[string]int
-	upgrades  map[string]int
-	armors    map[string]int
+	name     string
+	gold     int
+	potions  map[string]int
+	items    map[string]int
+	upgrades map[string]int
+	armors   map[string]int
 }
 
 func NewMerchant(name string, gold int) *Merchant {
@@ -30,10 +30,10 @@ func NewMerchant(name string, gold int) *Merchant {
 			"augmentation_inventaire": 100,
 		},
 		armors: map[string]int{
-			"tissu_de_lin_enchante": 50,
-			"fil_d_argent_runique":  50,
+			"tissu_de_lin_enchante":    50,
+			"fil_d_argent_runique":     50,
 			"poudre_de_pierre_lunaire": 50,
-			"perle_d_ame": 50,
+			"perle_d_ame":              50,
 		},
 	}
 }
@@ -97,7 +97,8 @@ func (p *Player) Buy(m *Merchant, category int, itemName string, quantity int) {
 		p.gold -= price
 		p.inventoryLimit++
 		p.upgradesBought++
-		fmt.Printf("✅ Amélioration achetée ! Nouvelle limite d'inventaire : %d. Gold restant : %d\n", p.inventoryLimit, p.gold)
+		fmt.Printf("✅ Amélioration achetée ! Nouvelle limite d'inventaire : %d. Gold restant : %d\n",
+			p.inventoryLimit, p.gold)
 		return
 	}
 
