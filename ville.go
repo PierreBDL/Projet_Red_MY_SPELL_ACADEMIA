@@ -12,7 +12,7 @@ func Entree_ville(joueur *Character_class) {
 	fmt.Println("\nVous entrez dans la ville de Musutafu !\n")
 	fmt.Println("1] 🤝 Marché")
 	fmt.Println("2] ⚒️  Forge")
-	fmt.Println("3] 🛌 Auberge")
+	fmt.Println("3] 🛌 Auberge (10G/nuit)")
 	fmt.Println("4] 🚶🪧  Quitter la ville")
 	fmt.Print("Quel est votre choix ? ")
 	fmt.Scan(&choix_ville)
@@ -33,14 +33,22 @@ func Entree_ville(joueur *Character_class) {
 		Nettoyage(joueur)
 		Forge(joueur)
 	case 3:
-		ancien_pv := joueur.Pv
-		joueur.Pv = joueur.Pv + 10
-		// Eviter débordement
-		if joueur.Pv > joueur.MaxPv {
-			joueur.Pv = joueur.MaxPv
+		if joueur.Gold >= 10 {
+			ancien_pv := joueur.Pv
+			joueur.Pv = joueur.Pv + 10
+			// Eviter débordement
+			if joueur.Pv > joueur.MaxPv {
+				joueur.Pv = joueur.MaxPv
+			}
+			pv_soignes := joueur.Pv - ancien_pv
+			fmt.Println("\nVous passez une bonne nuit de sommeil,", pv_soignes, "PVs soignés !")
+			// Prix
+			joueur.Gold -= 10
+			fmt.Println("Vous avez payez 10G, il vous reste", joueur.Gold, "G")
+		} else {
+			fmt.Println("Vous n'avez pas assez d'or, vous avez", joueur.Gold, "G")
 		}
-		pv_soignes := joueur.Pv - ancien_pv
-		fmt.Println("Vous passez une bonne nuit de sommeil,", pv_soignes, "PVs soignés !")
+
 	case 4:
 		return
 	default:
