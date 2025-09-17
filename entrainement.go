@@ -51,7 +51,7 @@ func Entrainement(joueur *Character_class) {
 
 		if choix_attaque == 1 {
 			// Son
-			jouerSon("./sounds/slash.ogg")
+			JouerSon("./sounds/slash.ogg")
 			// Attaque du joueur - éviter les dégâts négatifs
 			degats_joueur := joueur.Attaque - ennemie.Defence
 			if degats_joueur < 1 {
@@ -298,7 +298,7 @@ func Entrainement(joueur *Character_class) {
 
 				if choix_type_attaque == 1 {
 					// Son
-					jouerSon("./sounds/slash.ogg")
+					JouerSon("./sounds/slash.ogg")
 
 					// Attaque du joueur - éviter les dégâts négatifs
 					degats_joueur := joueur.Attaque - ennemie.Defence

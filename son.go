@@ -6,7 +6,7 @@ import (
 	"runtime"
 )
 
-func jouerSon(fichier string) {
+func JouerSon(fichier string) {
 	switch runtime.GOOS {
 	case "windows":
 		exec.Command("start", fichier).Start()

@@ -1,6 +1,10 @@
 package MSA
 
-import "fmt"
+import (
+	"bufio"
+	"fmt"
+	"os"
+)
 
 // ==================== STRUCTURE FORGERON ====================
 type Blacksmith struct {
@@ -60,6 +64,9 @@ func Forge(joueur *Character_class) {
 	fmt.Println("\n👋 Bonjour aventurier ! Tu es dans la forge d’Olivenders.")
 	fmt.Println("Veux-tu forger la baguette de sureau ? (oui/non)")
 
+	// Nettoyer le buffer d'entrée avant de demander
+	reader := bufio.NewReader(os.Stdin)
+	reader.ReadString('\n') // Vider le buffer des caractères restants
 	var response string
 	fmt.Scanln(&response)
 

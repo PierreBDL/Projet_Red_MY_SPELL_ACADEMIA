@@ -12,7 +12,7 @@ func Entree_ville(joueur *Character_class) {
 	fmt.Println("╠════════════════════════════════════════════════════════════════╣")
 	fmt.Println("║                                                                ║")
 	fmt.Println("║    🏪 1] 🤝 Marché          🏠 3] 🛌 Auberge (10G/nuit)        ║")
-	fmt.Println("║    ⚒️  2] ⚒️  Forge           🎯 4] 🎯 Terrain d'entraînement    ║")
+	fmt.Println("║    ⚒️  2] ⚒️  Forge           🎯 4] 🎯 Terrain d'entraînement  ║")
 	fmt.Println("║               5] 🚪🚶 Quitter la ville                         ║")
 	fmt.Println("║                                                                ║")
 	fmt.Println("╚════════════════════════════════════════════════════════════════╝")

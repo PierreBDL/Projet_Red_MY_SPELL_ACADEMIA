@@ -13,11 +13,11 @@ func Nettoyage(joueur *Character_class) {
 	fmt.Println("╔════════════════════════════════════════════════════════════════╗")
 	fmt.Println("║                    🎮 MY SPELL ACADEMIA 🎮                     ║")
 	fmt.Println("╠════════════════════════════════════════════════════════════════╣")
-	fmt.Printf("║    👤 %-20s              💰 %d G               ║\n", joueur.Name, joueur.Gold)
+	fmt.Printf("║    👤 %-20s              💰 %-4d G              ║\n", joueur.Name, joueur.Gold)
 	fmt.Printf("║    🎓 %-20s              🎯 Niveau %d            ║\n", joueur.Class, joueur.Niveau)
 	fmt.Println("║                                                                ║")
 	fmt.Printf("║     ❤️  Vie : %-3d/%-3d ", joueur.Pv, joueur.MaxPv)
-	fmt.Printf("  ⚔️  Attaque : %-3d  🛡️  Défense : %-3d      ║\n", joueur.Attaque, joueur.Defence)
+	fmt.Printf("  ⚔️  Attaque : %-3d  🛡️  Défense : %-3d   ║\n", joueur.Attaque, joueur.Defence)
 	fmt.Println("╚════════════════════════════════════════════════════════════════╝")
 
 	// Mise à jour des PVs max en fonction du niveau

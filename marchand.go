@@ -1,7 +1,9 @@
 package MSA
 
 import (
+	"bufio"
 	"fmt"
+	"os"
 )
 
 type Merchant struct {
@@ -203,6 +205,9 @@ func Marchand(joueur *Character_class) {
 	fmt.Println("3 - Améliorations")
 	fmt.Println("4 - Armures")
 
+	// Nettoyer le buffer d'entrée avant de demander
+	reader := bufio.NewReader(os.Stdin)
+	reader.ReadString('\n') // Vider le buffer des caractères restants
 	var choix int
 	fmt.Scanln(&choix)
 
@@ -212,6 +217,9 @@ func Marchand(joueur *Character_class) {
 		return
 	}
 
+	// Nettoyer le buffer d'entrée avant de demander
+	reader = bufio.NewReader(os.Stdin)
+	reader.ReadString('\n') // Vider le buffer des caractères restants
 	// Choix de l’item par numéro
 	fmt.Println("Choisis un objet en entrant son numéro :")
 	var itemIndex int
@@ -222,6 +230,10 @@ func Marchand(joueur *Character_class) {
 		return
 	}
 	itemName := items[itemIndex-1]
+
+	// Nettoyer le buffer d'entrée avant de demander
+	reader = bufio.NewReader(os.Stdin)
+	reader.ReadString('\n') // Vider le buffer des caractères restants
 
 	// Quantité à acheter
 	quantity := 1

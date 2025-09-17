@@ -29,6 +29,7 @@ cd PROJET_RED_MY_SPELL_ACADEMIA
 
 # Installer les outils pour les sons
 sudo apt install pulseaudio-utils
+sudo apt install libasound2-dev pkg-config
 
 # Lancez le jeu
 go run ./bin/main.go

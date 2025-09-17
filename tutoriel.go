@@ -8,6 +8,9 @@ import (
 )
 
 func Tutoriel(joueur *Character_class, tour int) int {
+	// Changer la musique pour le combat
+	JouerMusique("combat.mp3")
+
 	// Pitch du tutoriel
 	fmt.Println("Dans ce tutoriel, vous allez apprendre à mener un combat et à vous soigner !")
 	// Pause
@@ -52,7 +55,7 @@ func Tutoriel(joueur *Character_class, tour int) int {
 
 		if choix_attaque == 1 {
 			// Son
-			jouerSon("./sounds/slash2.ogg")
+			JouerSon("./sounds/slash2.ogg")
 			// Attaque du joueur - éviter les dégâts négatifs
 			degats_joueur := joueur.Attaque - ennemie.Defence
 			if degats_joueur < 1 {
@@ -199,7 +202,7 @@ func Tutoriel(joueur *Character_class, tour int) int {
 							fmt.Println("📖", joueur.Sorts[0][1])
 						} else {
 							// Son
-							jouerSon("./sounds/tonnerre.wav")
+							JouerSon("./sounds/tonnerre.wav")
 							dommages, err = strconv.Atoi(joueur.Sorts[1][2])
 							if err != nil {
 								dommages = 15
@@ -287,14 +290,14 @@ func Tutoriel(joueur *Character_class, tour int) int {
 
 			// Graphisme amélioré
 			fmt.Println("\n╔════════════════════════════════════════════════════════════════╗")
-			fmt.Println("║                 🏆 COMBAT FINAL D'ENTRAÎNEMENT 🏆             ║")
+			fmt.Println("║                 🏆 COMBAT FINAL D'ENTRAÎNEMENT 🏆              ║")
 			fmt.Println("╠════════════════════════════════════════════════════════════════╣")
 			fmt.Printf("║  👤 %-15s                    🎭 %-20s ║\n", "JOUEUR", strings.ToUpper(ennemie.Name))
-			fmt.Printf("║  ❤️  %3d/%-3d                           ❤️  %3d/%-3d               ║\n",
+			fmt.Printf("║  ❤️  %3d/%-3d                           ❤️  %3d/%-3d           ║\n",
 				joueur.Pv, joueur.MaxPv, ennemie.Pv, ennemie.MaxPv)
-			fmt.Printf("║  ⚔️  %-3d                               ⚔️  %-3d                   ║\n",
+			fmt.Printf("║  ⚔️  %-3d                               ⚔️  %-3d               ║\n",
 				joueur.Attaque, ennemie.Attaque)
-			fmt.Printf("║  🛡️  %-3d                               🛡️  %-3d                   ║\n",
+			fmt.Printf("║  🛡️  %-3d                               🛡️  %-3d               ║\n",
 				joueur.Defence, ennemie.Defence)
 			fmt.Println("╚════════════════════════════════════════════════════════════════╝")
 
@@ -327,7 +330,7 @@ func Tutoriel(joueur *Character_class, tour int) int {
 
 				if choix_type_attaque == 1 {
 					// Son
-					jouerSon("./sounds/slash2.ogg") // Cohérent avec entrainement.go
+					JouerSon("./sounds/slash2.ogg") // Cohérent avec entrainement.go
 
 					// Attaque du joueur - éviter les dégâts négatifs
 					degats_joueur := joueur.Attaque - ennemie.Defence
@@ -372,7 +375,7 @@ func Tutoriel(joueur *Character_class, tour int) int {
 							fmt.Println(ennemie.Name, "", joueur.Sorts[0][1])
 						} else {
 							// Son
-							jouerSon("./sounds/tonnerre.wav")
+							JouerSon("./sounds/tonnerre.wav")
 							dommages, err = strconv.Atoi(joueur.Sorts[1][2])
 							if err != nil {
 								dommages = 15
@@ -383,7 +386,7 @@ func Tutoriel(joueur *Character_class, tour int) int {
 
 						// Animation
 						frames := []string{
-							"   O  ◊                        O\n  /|\\|                        /|\\\n  / \\|                        / \\",
+							"   O  ◊                      O\n  /|\\|                        /|\\\n  / \\|                        / \\",
 							"   O  ◊  💥                     O\n  /|\\|                        /|\\\n  / \\|                        / \\",
 							"   O  ◊     💥                  O\n  /|\\|                        /|\\\n  / \\|                        / \\",
 							"   O  ◊        💥               O\n  /|\\|                        /|\\\n  / \\|                        / \\",

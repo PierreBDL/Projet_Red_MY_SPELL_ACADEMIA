@@ -8,6 +8,9 @@ import (
 
 func Combat(joueur *Character_class, ennemie *Character_class, tour int) int {
 
+	// Musique de combat
+	JouerMusique("combat.mp3")
+
 	// Tant que l'ennemie ou le joueur a des PVs
 	for ennemie.Pv > 0 && joueur.Pv > 0 {
 		// Nettoyage de la console
@@ -16,10 +19,10 @@ func Combat(joueur *Character_class, ennemie *Character_class, tour int) int {
 
 		// Graphisme amélioré
 		fmt.Println("\n╔════════════════════════════════════════════════════════════════╗")
-		fmt.Println("║                        ⚔️  COMBAT  ⚔️                            ║")
+		fmt.Println("║                        ⚔️  COMBAT  ⚔️                          ║")
 		fmt.Println("╠════════════════════════════════════════════════════════════════╣")
 		fmt.Printf("║  👤 %-15s                    🔥 %-15s      ║\n", "JOUEUR", strings.ToUpper(ennemie.Name))
-		fmt.Printf("║  ❤️  %3d/%-3d                           ❤️  %3d/%-3d               ║\n",
+		fmt.Printf("║  ❤️  %3d/%-3d                           ❤️  %3d/%-3d             ║\n",
 			joueur.Pv, joueur.MaxPv, ennemie.Pv, ennemie.MaxPv)
 		fmt.Printf("║  ⚔️  %-3d                               ⚔️  %-3d           	 ║\n",
 			joueur.Attaque, ennemie.Attaque)
@@ -70,7 +73,7 @@ func Combat(joueur *Character_class, ennemie *Character_class, tour int) int {
 					tour++
 
 					// Son
-					jouerSon("./sounds/slash2.ogg") // Même son que dans entrainement.go
+					JouerSon("./sounds/slash2.ogg") // Même son que dans entrainement.go
 
 					// Attaque du joueur - éviter les dégâts négatifs
 					degats_joueur := joueur.Attaque - ennemie.Defence
@@ -146,7 +149,7 @@ func Combat(joueur *Character_class, ennemie *Character_class, tour int) int {
 							tour++
 
 							// Son pour le sort Incendio
-							jouerSon("./sounds/tonnerre.wav") // Même son que dans entrainement.go
+							JouerSon("./sounds/tonnerre.wav") // Même son que dans entrainement.go
 
 							// Attaque du joueur avec description du sort
 							ennemie.Pv -= (dommages)
@@ -181,10 +184,10 @@ func Combat(joueur *Character_class, ennemie *Character_class, tour int) int {
 
 				// Graphisme
 				fmt.Println("\n╔════════════════════════════════════════════════════════════════╗")
-				fmt.Println("║                        ⚔️  COMBAT  ⚔️                            ║")
+				fmt.Println("║                        ⚔️  COMBAT  ⚔️                          ║")
 				fmt.Println("╠════════════════════════════════════════════════════════════════╣")
 				fmt.Printf("║  👤 %-15s                    🔥 %-15s      ║\n", "JOUEUR", strings.ToUpper(ennemie.Name))
-				fmt.Printf("║  ❤️  %3d/%-3d                           ❤️  %3d/%-3d               ║\n",
+				fmt.Printf("║  ❤️  %3d/%-3d                           ❤️  %3d/%-3d             ║\n",
 					joueur.Pv, joueur.MaxPv, ennemie.Pv, ennemie.MaxPv)
 				fmt.Printf("║  ⚔️  %-3d                               ⚔️  %-3d           	 ║\n",
 					joueur.Attaque, ennemie.Attaque)
@@ -207,10 +210,10 @@ func Combat(joueur *Character_class, ennemie *Character_class, tour int) int {
 
 				// Graphisme
 				fmt.Println("\n╔════════════════════════════════════════════════════════════════╗")
-				fmt.Println("║                        ⚔️  COMBAT  ⚔️                            ║")
+				fmt.Println("║                        ⚔️  COMBAT  ⚔️                          ║")
 				fmt.Println("╠════════════════════════════════════════════════════════════════╣")
 				fmt.Printf("║  👤 %-15s                    🔥 %-15s      ║\n", "JOUEUR", strings.ToUpper(ennemie.Name))
-				fmt.Printf("║  ❤️  %3d/%-3d                           ❤️  %3d/%-3d               ║\n",
+				fmt.Printf("║  ❤️  %3d/%-3d                           ❤️  %3d/%-3d             ║\n",
 					joueur.Pv, joueur.MaxPv, ennemie.Pv, ennemie.MaxPv)
 				fmt.Printf("║  ⚔️  %-3d                               ⚔️  %-3d           	 ║\n",
 					joueur.Attaque, ennemie.Attaque)
@@ -226,10 +229,10 @@ func Combat(joueur *Character_class, ennemie *Character_class, tour int) int {
 
 				// Graphisme
 				fmt.Println("\n╔════════════════════════════════════════════════════════════════╗")
-				fmt.Println("║                        ⚔️  COMBAT  ⚔️                            ║")
+				fmt.Println("║                        ⚔️  COMBAT  ⚔️                          ║")
 				fmt.Println("╠════════════════════════════════════════════════════════════════╣")
 				fmt.Printf("║  👤 %-15s                    🔥 %-15s      ║\n", "JOUEUR", strings.ToUpper(ennemie.Name))
-				fmt.Printf("║  ❤️  %3d/%-3d                           ❤️  %3d/%-3d               ║\n",
+				fmt.Printf("║  ❤️  %3d/%-3d                           ❤️  %3d/%-3d             ║\n",
 					joueur.Pv, joueur.MaxPv, ennemie.Pv, ennemie.MaxPv)
 				fmt.Printf("║  ⚔️  %-3d                               ⚔️  %-3d           	 ║\n",
 					joueur.Attaque, ennemie.Attaque)
