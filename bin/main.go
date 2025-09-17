@@ -85,7 +85,7 @@ func main() {
 
 			// Choix de la classe du personnage
 			choix_classe := 0
-			fmt.Println("\nQue voulez-vous être ?\n")
+			fmt.Println("\nQue voulez-vous être ?")
 			fmt.Println("1] Sorcier")
 			fmt.Println("2] Alchimiste")
 			fmt.Print("Quel est votre choix ? ")
@@ -125,7 +125,7 @@ func main() {
 			tour := 1
 
 			// Boucle infinie
-			for running == true {
+			for running {
 				// 1er tour : affichage du message d'accueil et tutoriel
 				if tour == 1 {
 					fmt.Println("\nVous débutez votre aventure dans le monde de la magie !")
