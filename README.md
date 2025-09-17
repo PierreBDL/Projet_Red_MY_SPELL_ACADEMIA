@@ -12,6 +12,7 @@ Ce jeu a été développé par l'équipe MSA (MY SPELL ACADEMIA) qui est compos�
 - Economie dans le jeu pour acheter au marché et forgeron
 - ASCII Art + Emoji pour les graphismes.
 - Sons pour les attaques
+- Musiques
 
 ---
 
