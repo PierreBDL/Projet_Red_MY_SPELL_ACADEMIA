@@ -3,9 +3,12 @@ package MSA
 import "fmt"
 
 func Nettoyage(joueur *Character_class) {
-	for i := 0; i < 100; i++ { // 100 lignes nettoyées
-		fmt.Print("\033[A\033[A\033[2K")
-	}
+	// Alternative plus simple pour le nettoyage
+	fmt.Print("\033[2J")   // Efface l'écran
+	fmt.Print("\033[0;0H") // Place le curseur en haut à gauche
+
+	// ou encore plus simple :
+	// fmt.Print("\033c") // Reset complet du terminal
 
 	fmt.Println("╔════════════════════════════════════════════════════════════════╗")
 	fmt.Println("║                    🎮 MY SPELL ACADEMIA 🎮                     ║")
@@ -22,7 +25,7 @@ func Nettoyage(joueur *Character_class) {
 		// Calcul basé sur les PV de base selon la classe
 		var basePv int
 		if joueur.Class == "Sang mélé" {
-			basePv = 150 // PV de base pour Harry Potter
+			basePv = 150
 		} else if joueur.Class == "Sorcier" {
 			basePv = 100
 		} else if joueur.Class == "Alchimiste" {
@@ -31,7 +34,7 @@ func Nettoyage(joueur *Character_class) {
 			basePv = 50
 		}
 
-		// Calcul absolu : PV de base + bonus de niveau
+		// Calcul PV niveau supérieur: PV de base + bonus de niveau
 		joueur.MaxPv = basePv + 10*(joueur.Niveau-1)
 
 		// S'assurer que les PV actuels ne dépassent pas le maximum

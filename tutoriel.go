@@ -48,6 +48,8 @@ func Tutoriel(joueur *Character_class, tour int) int {
 		if choix_attaque == 1 {
 			// Tour + 1
 			tour++
+			// Son
+			jouerSon("./sounds/slash.ogg")
 			// Attaque du joueur
 			ennemie.Pv -= (joueur.Attaque - ennemie.Defence)
 			fmt.Println("\nVous infligez", joueur.Attaque-ennemie.Defence, "dommages !")
@@ -182,6 +184,9 @@ func Tutoriel(joueur *Character_class, tour int) int {
 						// Gestion du combat
 						switch choix_attaque {
 						case 1:
+							// Son
+							jouerSon("./sounds/slash.ogg")
+							// Suppression
 							fmt.Print("\033[A\033[2K") // supprime la ligne attaque du joueur
 							fmt.Print("\033[A\033[2K") // supprime la ligne attaque de l'ennemi
 							// Attaque du joueur

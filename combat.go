@@ -2,7 +2,6 @@ package MSA
 
 import (
 	"fmt"
-	// Atoi
 	"strconv"
 	"strings"
 )
@@ -69,6 +68,9 @@ func Combat(joueur *Character_class, ennemie *Character_class, tour int) int {
 				if choix_type_attaque == 1 {
 					// Tour + 1
 					tour++
+
+					// Son
+					jouerSon("./sounds/slash.ogg")
 
 					// Attaque du joueur - éviter les dégâts négatifs
 					degats_joueur := joueur.Attaque - ennemie.Defence

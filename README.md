@@ -9,7 +9,9 @@ Ce jeu a été développé par l'équipe MSA (MY SPELL ACADEMIA) qui est compos�
 - Choix dans le terminal (CMD).
 - Création et personnalisation de votre sorcier.
 - Combats au tour par tour contre des monstres.
-- ASCII Art pour les graphismes.
+- Economie dans le jeu pour acheter au marché et forgeron
+- ASCII Art + Emoji pour les graphismes.
+- Sons pour les attaques
 
 ---
 
@@ -24,6 +26,9 @@ git clone https://github.com/ton-pseudo/my-spell-academia.git
 
 # Accédez au dossier
 cd PROJET_RED_MY_SPELL_ACADEMIA
+
+# Installer les outils pour les sons
+sudo apt install pulseaudio-utils
 
 # Lancez le jeu
 go run ./bin/main.go
