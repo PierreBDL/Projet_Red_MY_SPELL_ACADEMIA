@@ -13,6 +13,9 @@ func Combat(joueur *Character_class, ennemie *Character_class, tour int) int {
 
 	// Tant que l'ennemie ou le joueur a des PVs
 	for ennemie.Pv > 0 && joueur.Pv > 0 {
+		// Tour
+		tour++
+
 		// Nettoyage de la console
 		Nettoyage(joueur)
 		Nettoyage(joueur)

@@ -79,7 +79,7 @@ func (m *Merchant) DisplayCategory(choice int, joueur *Character_class) []string
 			fmt.Println("❌ Tu as déjà acheté toutes les améliorations disponibles.")
 		}
 	case 4:
-		fmt.Println("Catégorie : Armures (matériaux)")
+		fmt.Println("Catégorie : Armures ")
 		i := 1
 		for armor, price := range m.armors {
 			fmt.Printf("%d - %s : %d gold\n", i, armor, price)

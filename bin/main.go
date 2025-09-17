@@ -41,15 +41,17 @@ func main() {
 	choix_menu := 0
 	fmt.Scan(&choix_menu)
 
-	if choix_menu < 1 || choix_menu > 2 {
-		fmt.Print("Choix invalide. Veuillez recommencer ")
-		fmt.Print("\033[A\033[2K") // Remonte et efface les dernières lignes
-		fmt.Print("Quel est votre choix ? ")
-		fmt.Scan(&choix_menu)
+	if choix_menu != 1 && choix_menu != 2 {
+		for choix_menu != 1 && choix_menu != 2 {
+			fmt.Print("Choix invalide. Veuillez recommencer ")
+			fmt.Print("\033[A\033[2K") // Remonte et efface les dernières lignes
+			fmt.Print("Quel est votre choix ? ")
+			fmt.Scan(&choix_menu)
+		}
 	} else {
 		// Lancement du jeu
 		if choix_menu == 1 {
-			time.Sleep(2 * time.Second)
+			time.Sleep(1 * time.Second)
 
 			// Nettoyer le buffer d'entrée avant de demander le nom
 			reader := bufio.NewReader(os.Stdin)

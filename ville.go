@@ -5,6 +5,9 @@ import (
 )
 
 func Entree_ville(joueur *Character_class) {
+	// Musique de la ville
+	JouerMusique("ville.mp3")
+
 	Nettoyage(joueur)
 
 	fmt.Println("╔════════════════════════════════════════════════════════════════╗")

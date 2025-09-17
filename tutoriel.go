@@ -28,11 +28,11 @@ func Tutoriel(joueur *Character_class, tour int) int {
 	fmt.Println("║                         🎯 TUTORIEL 🎯                         ║")
 	fmt.Println("╠════════════════════════════════════════════════════════════════╣")
 	fmt.Printf("║  👤 %-15s                    🎭 %-20s ║\n", "JOUEUR", strings.ToUpper(ennemie.Name))
-	fmt.Printf("║  ❤️  %3d/%-3d                           ❤️  %3d/%-3d               ║\n",
+	fmt.Printf("║  ❤️  %3d/%-3d                           ❤️  %3d/%-3d             ║\n",
 		joueur.Pv, joueur.MaxPv, ennemie.Pv, ennemie.MaxPv)
-	fmt.Printf("║  ⚔️  %-3d                               ⚔️  %-3d                   ║\n",
+	fmt.Printf("║  ⚔️  %-3d                               ⚔️  %-3d                 ║\n",
 		joueur.Attaque, ennemie.Attaque)
-	fmt.Printf("║  🛡️  %-3d                               🛡️  %-3d                   ║\n",
+	fmt.Printf("║  🛡️  %-3d                               🛡️  %-3d                 ║\n",
 		joueur.Defence, ennemie.Defence)
 	fmt.Println("╚════════════════════════════════════════════════════════════════╝")
 
@@ -55,7 +55,7 @@ func Tutoriel(joueur *Character_class, tour int) int {
 
 		if choix_attaque == 1 {
 			// Son
-			JouerSon("./sounds/slash2.ogg")
+			JouerSon("../sounds/slash2.ogg")
 			// Attaque du joueur - éviter les dégâts négatifs
 			degats_joueur := joueur.Attaque - ennemie.Defence
 			if degats_joueur < 1 {
@@ -75,15 +75,19 @@ func Tutoriel(joueur *Character_class, tour int) int {
 			joueur.Pv -= degats_ennemi
 			fmt.Println("Le", ennemie.Name, "vous inflige", degats_ennemi, "dommages !\n")
 			attaque_faite = true
-		}
-
-		// Quitter
-		if choix_attaque == 3 {
-			return tour + 1
+			// Pause
+			fmt.Print("Appuyez sur Entrée pour continuer...")
+			fmt.Scanln()
 		}
 	}
 
 	if attaque_faite {
+		// Nettoyage
+		Nettoyage(joueur)
+
+		// Tour
+		tour++
+
 		// ÉTAPE 2 : Apprentissage des soins
 		fmt.Println("\n📖 LEÇON 2 : Utilisation des potions")
 		fmt.Println("L'ennemi vous a fait des dégâts, il faut vous soigner !")
@@ -129,14 +133,16 @@ func Tutoriel(joueur *Character_class, tour int) int {
 						}
 					}
 				case 2:
-					fmt.Println("Vous quittez le terrain d'entraînement")
-					return tour + 1
+					fmt.Println("Vous ne pouvez pas quitter le tutoriel !")
 				}
 
 				fmt.Println("\n✅ Excellent ! Vous maîtrisez les potions !")
 				break
 			}
 		}
+
+		// Tour
+		tour++
 
 		// ÉTAPE 3 : Apprentissage des sorts
 		fmt.Println("\n📖 LEÇON 3 : Lancement de sorts")
@@ -151,14 +157,14 @@ func Tutoriel(joueur *Character_class, tour int) int {
 			Nettoyage(joueur) // Un seul appel
 
 			fmt.Println("\n╔════════════════════════════════════════════════════════════════╗")
-			fmt.Println("║                    🪄 APPRENTISSAGE DES SORTS 🪄                 ║")
+			fmt.Println("║                  🪄 APPRENTISSAGE DES SORTS 🪄                 ║")
 			fmt.Println("╠════════════════════════════════════════════════════════════════╣")
 			fmt.Printf("║  👤 %-15s                    🎭 %-20s ║\n", "JOUEUR", strings.ToUpper(ennemie.Name))
-			fmt.Printf("║  ❤️  %3d/%-3d                           ❤️  %3d/%-3d               ║\n",
+			fmt.Printf("║  ❤️  %3d/%-3d                           ❤️  %3d/%-3d             ║\n",
 				joueur.Pv, joueur.MaxPv, ennemie.Pv, ennemie.MaxPv)
-			fmt.Printf("║  ⚔️  %-3d                               ⚔️  %-3d                   ║\n",
+			fmt.Printf("║  ⚔️  %-3d                               ⚔️  %-3d                 ║\n",
 				joueur.Attaque, ennemie.Attaque)
-			fmt.Printf("║  🛡️  %-3d                               🛡️  %-3d                   ║\n",
+			fmt.Printf("║  🛡️  %-3d                               🛡️  %-3d                 ║\n",
 				joueur.Defence, ennemie.Defence)
 			fmt.Println("╚════════════════════════════════════════════════════════════════╝")
 
@@ -202,7 +208,7 @@ func Tutoriel(joueur *Character_class, tour int) int {
 							fmt.Println("📖", joueur.Sorts[0][1])
 						} else {
 							// Son
-							JouerSon("./sounds/tonnerre.wav")
+							JouerSon("../sounds/tonnerre.wav")
 							dommages, err = strconv.Atoi(joueur.Sorts[1][2])
 							if err != nil {
 								dommages = 15
@@ -215,14 +221,14 @@ func Tutoriel(joueur *Character_class, tour int) int {
 						// Animation
 						frames := []string{
 							"   O  ◊                        O\n  /|\\|                        /|\\\n  / \\|                        / \\",
-							"   O  ◊  💥                     O\n  /|\\|                        /|\\\n  / \\|                        / \\",
+							"   O  ◊  💥                    O\n  /|\\|                        /|\\\n  / \\|                        / \\",
 							"   O  ◊     💥                  O\n  /|\\|                        /|\\\n  / \\|                        / \\",
 							"   O  ◊        💥               O\n  /|\\|                        /|\\\n  / \\|                        / \\",
 							"   O  ◊           💥            O\n  /|\\|                        /|\\\n  / \\|                        / \\",
 							"   O  ◊              💥         O\n  /|\\|                        /|\\\n  / \\|                        / \\",
 							"   O  ◊                 💥      O\n  /|\\|                        /|\\\n  / \\|                        / \\",
 							"   O  ◊                    💥   O\n  /|\\|                        /|\\\n  / \\|                        / \\",
-							"   O  ◊                    💥💢O\n  /|\\|                        💢|\\\n  / \\|                        / \\",
+							"   O  ◊                    💥💢O\n  /|\\|                         |\\\n  / \\|                        / \\",
 							"   O  ◊                         O\n  /|\\|                        /|\\\n  / \\|                        / \\",
 						}
 
@@ -255,16 +261,7 @@ func Tutoriel(joueur *Character_class, tour int) int {
 						sort_appris = true
 					}
 				} else if choix_type_attaque == 1 {
-					// Attaque normale pour montrer la différence
-					degats_joueur := joueur.Attaque - ennemie.Defence
-					if degats_joueur < 1 {
-						degats_joueur = 1
-					}
-					ennemie.Pv -= degats_joueur
-					fmt.Println("\nAttaque à l'épée ! Vous infligez", degats_joueur, "dommages !")
-					fmt.Println("💡 Conseil : Essayez maintenant l'option 'Lancer un sort' !")
-					fmt.Println("Appuyez sur Entrée pour continuer...")
-					fmt.Scanln(&pause)
+					fmt.Println("⚠️  Vous devez d'abord apprendre à utiliser vos sorts !")
 				}
 			} else if choix_attaque == 3 {
 				// Forcer l'apprentissage des sorts
@@ -286,6 +283,9 @@ func Tutoriel(joueur *Character_class, tour int) int {
 
 		// Boucle pour vaincre avec système complet
 		for ennemie.Pv > 0 && joueur.Pv > 0 {
+			// Tour
+			tour++
+
 			Nettoyage(joueur) // Un seul appel
 
 			// Graphisme amélioré
@@ -293,11 +293,11 @@ func Tutoriel(joueur *Character_class, tour int) int {
 			fmt.Println("║                 🏆 COMBAT FINAL D'ENTRAÎNEMENT 🏆              ║")
 			fmt.Println("╠════════════════════════════════════════════════════════════════╣")
 			fmt.Printf("║  👤 %-15s                    🎭 %-20s ║\n", "JOUEUR", strings.ToUpper(ennemie.Name))
-			fmt.Printf("║  ❤️  %3d/%-3d                           ❤️  %3d/%-3d           ║\n",
+			fmt.Printf("║  ❤️  %3d/%-3d                           ❤️  %3d/%-3d            ║\n",
 				joueur.Pv, joueur.MaxPv, ennemie.Pv, ennemie.MaxPv)
-			fmt.Printf("║  ⚔️  %-3d                               ⚔️  %-3d               ║\n",
+			fmt.Printf("║  ⚔️  %-3d                               ⚔️  %-3d                ║\n",
 				joueur.Attaque, ennemie.Attaque)
-			fmt.Printf("║  🛡️  %-3d                               🛡️  %-3d               ║\n",
+			fmt.Printf("║  🛡️  %-3d                               🛡️  %-3d                ║\n",
 				joueur.Defence, ennemie.Defence)
 			fmt.Println("╚════════════════════════════════════════════════════════════════╝")
 
@@ -330,7 +330,7 @@ func Tutoriel(joueur *Character_class, tour int) int {
 
 				if choix_type_attaque == 1 {
 					// Son
-					JouerSon("./sounds/slash2.ogg") // Cohérent avec entrainement.go
+					JouerSon("../sounds/slash2.ogg") // Cohérent avec entrainement.go
 
 					// Attaque du joueur - éviter les dégâts négatifs
 					degats_joueur := joueur.Attaque - ennemie.Defence
@@ -375,7 +375,7 @@ func Tutoriel(joueur *Character_class, tour int) int {
 							fmt.Println(ennemie.Name, "", joueur.Sorts[0][1])
 						} else {
 							// Son
-							JouerSon("./sounds/tonnerre.wav")
+							JouerSon("../sounds/tonnerre.wav")
 							dommages, err = strconv.Atoi(joueur.Sorts[1][2])
 							if err != nil {
 								dommages = 15
