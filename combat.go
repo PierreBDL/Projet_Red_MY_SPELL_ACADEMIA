@@ -70,7 +70,7 @@ func Combat(joueur *Character_class, ennemie *Character_class, tour int) int {
 					tour++
 
 					// Son
-					jouerSon("./sounds/slash.ogg")
+					jouerSon("./sounds/slash2.ogg") // Même son que dans entrainement.go
 
 					// Attaque du joueur - éviter les dégâts négatifs
 					degats_joueur := joueur.Attaque - ennemie.Defence
@@ -119,12 +119,18 @@ func Combat(joueur *Character_class, ennemie *Character_class, tour int) int {
 							tour++
 
 							// Attaque du joueur avec description du sort
-							ennemie.Pv -= (dommages)
+							ennemie.Pv -= dommages
 							fmt.Print("\nVous lancez", joueur.Sorts[0][0])
 							fmt.Println(ennemie.Name, "", joueur.Sorts[0][1]) // Description du sort
-							// Attaque de l'ennemis
-							joueur.Pv -= (ennemie.Attaque - joueur.Defence)
-							fmt.Println("Le", ennemie.Name, "vous inflige", ennemie.Attaque-joueur.Defence, "dommages !\n")
+							fmt.Println("Vous infligez", dommages, "dommages magiques !")
+
+							// Attaque de l'ennemi - éviter les dégâts négatifs
+							degats_ennemi := ennemie.Attaque - joueur.Defence
+							if degats_ennemi < 1 {
+								degats_ennemi = 1
+							}
+							joueur.Pv -= degats_ennemi
+							fmt.Println("Le", ennemie.Name, "vous inflige", degats_ennemi, "dommages !\n")
 
 							// Pause pour permettre au joueur de lire
 							fmt.Print("Appuyez sur Entrée pour continuer...")
@@ -139,13 +145,22 @@ func Combat(joueur *Character_class, ennemie *Character_class, tour int) int {
 							// Tour + 1
 							tour++
 
+							// Son pour le sort Incendio
+							jouerSon("./sounds/tonnerre.wav") // Même son que dans entrainement.go
+
 							// Attaque du joueur avec description du sort
 							ennemie.Pv -= (dommages)
 							fmt.Print("\nVous lancez", joueur.Sorts[1][0], "!")
 							fmt.Println(ennemie.Name, "", joueur.Sorts[1][1]) // Description du sort
-							// Attaque de l'ennemis
-							joueur.Pv -= (ennemie.Attaque - joueur.Defence)
-							fmt.Println("Le", ennemie.Name, "vous inflige", ennemie.Attaque-joueur.Defence, "dommages !\n")
+							fmt.Println("Vous infligez", dommages, "dommages magiques !")
+
+							// Attaque de l'ennemi - éviter les dégâts négatifs
+							degats_ennemi := ennemie.Attaque - joueur.Defence
+							if degats_ennemi < 1 {
+								degats_ennemi = 1
+							}
+							joueur.Pv -= degats_ennemi
+							fmt.Println("Le", ennemie.Name, "vous inflige", degats_ennemi, "dommages !\n")
 
 							// Pause pour permettre au joueur de lire
 							fmt.Print("Appuyez sur Entrée pour continuer...")
