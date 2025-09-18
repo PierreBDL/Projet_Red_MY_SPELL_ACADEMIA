@@ -105,7 +105,8 @@ func Entrainement(joueur *Character_class) {
 				choix_inv := 0
 				println("Utiliser un objet de l'inventaire ?")
 				fmt.Println("1] Potion de soin <-- Choisissez cette option")
-				fmt.Println("2] Quitter")
+				fmt.Println("2] Potion de poison")
+				fmt.Println("3] Quitter")
 				fmt.Print("Quel est votre choix ? ")
 				fmt.Scan(&choix_inv)
 
@@ -130,6 +131,8 @@ func Entrainement(joueur *Character_class) {
 				case 2:
 					fmt.Println("Vous quittez le terrain d'entraînement")
 					return
+				case 3:
+					fmt.Println("Vous quittez le terrain d'entraînement")
 				}
 
 				fmt.Println("\n✅ Excellent ! Vous maîtrisez les potions !")
