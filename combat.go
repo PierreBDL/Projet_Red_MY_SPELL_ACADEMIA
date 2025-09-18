@@ -83,7 +83,7 @@ func Combat(joueur *Character_class, ennemie *Character_class, tour int) int {
 				tour++
 
 				// Son
-				JouerSon("../sounds/slash2.ogg") // Même son que dans entrainement.go
+				JouerSon("../sounds/slash2.ogg")
 
 				// Attaque du joueur
 				degats_joueur := joueur.Attaque - ennemie.Defence
@@ -93,27 +93,34 @@ func Combat(joueur *Character_class, ennemie *Character_class, tour int) int {
 				ennemie.Pv -= degats_joueur
 				fmt.Println("\nVous infligez", degats_joueur, "dommages !")
 
-				// Attaque de l'ennemi
+				// Attaque de l'ennemi avec système amélioré
 				var degats_ennemi int
 				aleatoire_attaque_ennemie := Ennemis_type_attaque()
 				if aleatoire_attaque_ennemie >= 0 && aleatoire_attaque_ennemie < len(ennemie.Type_attaque) {
-					fmt.Printf("%s : %s\n", ennemie.Type_attaque[aleatoire_attaque_ennemie][0], ennemie.Type_attaque[aleatoire_attaque_ennemie][1])
+					// Affichage du titre et de la description de l'attaque
+					titre := ennemie.Type_attaque[aleatoire_attaque_ennemie][0]
+					description := ennemie.Type_attaque[aleatoire_attaque_ennemie][1]
+					fmt.Printf("🗡️  %s : %s\n", titre, description)
+
 					// Conversion string vers int
-					degats_s := ennemie.Type_attaque[aleatoire_attaque_ennemie][2]
-					degats, err := strconv.Atoi(degats_s)
+					degatsStr := ennemie.Type_attaque[aleatoire_attaque_ennemie][2]
+					degats, err := strconv.Atoi(degatsStr)
 					if err != nil {
+						// En cas d'erreur, utiliser l'attaque de base
 						degats_ennemi = ennemie.Attaque - joueur.Defence
 					} else {
-						degats_ennemi = degats - joueur.Defence
+						degats_ennemi = (degats + ennemie.Attaque) - joueur.Defence
 					}
 				} else {
-					fmt.Printf("Attaque de base : Le %s vous attaque !\n", ennemie.Name)
+					fmt.Printf("🗡️  Attaque de base : Le %s vous attaque !\n", ennemie.Name)
 					degats_ennemi = ennemie.Attaque - joueur.Defence
 				}
-				// Éviter les dégâts négatifs
+
+				// IMPORTANT : Protection contre les dégâts négatifs
 				if degats_ennemi < 1 {
 					degats_ennemi = 1 // Minimum 1 dégât
 				}
+
 				joueur.Pv -= degats_ennemi
 				fmt.Println("Le", ennemie.Name, "vous inflige", degats_ennemi, "dommages !\n")
 
