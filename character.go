@@ -19,6 +19,9 @@ type Character_class struct {
 	MaxMana        int
 	// Ennemis
 	Type_attaque [][]string // attaques ennemis
+	// Poison
+	Empoisonne  bool
+	Tour_poison int
 }
 
 func InitCharacter(nom string, classe int) Character_class {
@@ -138,6 +141,8 @@ func InitEnnemi(monstre string) Character_class {
 				{"Coup de massue", "Le gobelin vous assène un coup de massue", "15"},
 				{"Coup de pied", "Le gobelin vous donne un coup de pied", "20"},
 			},
+			Empoisonne:  false,
+			Tour_poison: 0,
 		}
 	}
 	if monstre == "boss" {
@@ -156,6 +161,8 @@ func InitEnnemi(monstre string) Character_class {
 				{"Coup de pied écrasant", "Le boss vous écrase avec son pied", "25"},
 				{"Charge dévastatrice", "Le boss vous charge de toutes ses forces", "30"},
 			},
+			Empoisonne:  false,
+			Tour_poison: 0,
 		}
 	}
 	// Ennemi par défaut
@@ -172,6 +179,8 @@ func InitEnnemi(monstre string) Character_class {
 			{"Coup d'épée", "L'orc vous frappe avec son épée", "18"},
 			{"Rugissement", "L'orc rugit et vous intimide", "12"},
 		},
+		Empoisonne:  false,
+		Tour_poison: 0,
 	}
 }
 
@@ -189,5 +198,7 @@ func TutoEnnemi() Character_class {
 			{"Coup de slime", "Le slime vous frappe mollement", "8"},
 			{"Jet d'acide faible", "Le slime crache un peu d'acide", "12"},
 		},
+		Empoisonne:  false,
+		Tour_poison: 0,
 	}
 }

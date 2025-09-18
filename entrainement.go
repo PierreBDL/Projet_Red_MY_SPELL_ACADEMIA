@@ -272,6 +272,23 @@ func Entrainement(joueur *Character_class) {
 				joueur.Defence, ennemie.Defence)
 			fmt.Println("╚════════════════════════════════════════════════════════════════╝")
 
+			// Poison
+			if ennemie.Empoisonne {
+				if ennemie.Tour_poison <= 5 {
+					ennemie.Pv -= 5
+					ennemie.Tour_poison++
+					fmt.Println("\nLe", ennemie.Name, "subit 5 points de dégâts de poison !")
+					if ennemie.Pv < 0 {
+						ennemie.Pv = 0
+					}
+				}
+				if ennemie.Tour_poison >= 5 {
+					ennemie.Empoisonne = false
+					ennemie.Tour_poison = 0
+					fmt.Println("Le", ennemie.Name, " a vaincu le poison !\n")
+				}
+			}
+
 			// Choix de l'attaque
 			choix_attaque := 0
 			println("Utilisez toutes vos compétences ! Que voulez-vous faire ?")
@@ -409,6 +426,9 @@ func Entrainement(joueur *Character_class) {
 
 					fmt.Print("Appuyez sur Entrée pour continuer...")
 					fmt.Scanln()
+
+					// Poison
+					ennemie.Empoisonne = true
 				}
 
 			case 3:

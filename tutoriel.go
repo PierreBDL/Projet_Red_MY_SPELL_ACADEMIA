@@ -110,7 +110,8 @@ func Tutoriel(joueur *Character_class, tour int) int {
 				choix_inv := 0
 				println("Utiliser un objet de l'inventaire ?")
 				fmt.Println("1] Potion de soin <-- Choisissez cette option")
-				fmt.Println("2] Quitter")
+				fmt.Println("2] Potion de poison")
+				fmt.Println("3] Quitter")
 				fmt.Print("Quel est votre choix ? ")
 				fmt.Scan(&choix_inv)
 
@@ -133,6 +134,8 @@ func Tutoriel(joueur *Character_class, tour int) int {
 						}
 					}
 				case 2:
+					fmt.Println("Indisponible pour le tutoriel !")
+				case 3:
 					fmt.Println("Vous ne pouvez pas quitter le tutoriel !")
 				}
 
@@ -171,7 +174,7 @@ func Tutoriel(joueur *Character_class, tour int) int {
 			fmt.Println("\nPour lancer un sort, choisissez d'abord 'Attaquer', puis 'Lancer un sort' !")
 			fmt.Println("1] 🗡️ Attaquer")
 			fmt.Println("2] 📦 Regarder dans l'inventaire")
-			fmt.Println("3] 🕊️ Continuer l'entraînement")
+			fmt.Println("3] 🕊️ Continuer le tutoriel")
 			fmt.Print("Quel est votre choix ? ")
 			fmt.Scan(&choix_attaque)
 
@@ -301,6 +304,23 @@ func Tutoriel(joueur *Character_class, tour int) int {
 				joueur.Defence, ennemie.Defence)
 			fmt.Println("╚════════════════════════════════════════════════════════════════╝")
 
+			// Poison
+			if ennemie.Empoisonne {
+				if ennemie.Tour_poison <= 5 {
+					ennemie.Pv -= 5
+					ennemie.Tour_poison++
+					fmt.Println("\nLe", ennemie.Name, "subit 5 points de dégâts de poison !")
+					if ennemie.Pv < 0 {
+						ennemie.Pv = 0
+					}
+				}
+				if ennemie.Tour_poison >= 5 {
+					ennemie.Empoisonne = false
+					ennemie.Tour_poison = 0
+					fmt.Println("Le", ennemie.Name, " a vaincu le poison !\n")
+				}
+			}
+
 			// Choix de l'attaque
 			choix_attaque := 0
 			println("Utilisez toutes vos compétences ! Que voulez-vous faire ?")
@@ -330,7 +350,7 @@ func Tutoriel(joueur *Character_class, tour int) int {
 
 				if choix_type_attaque == 1 {
 					// Son
-					JouerSon("../sounds/slash2.ogg") // Cohérent avec entrainement.go
+					JouerSon("../sounds/slash2.ogg")
 
 					// Attaque du joueur - éviter les dégâts négatifs
 					degats_joueur := joueur.Attaque - ennemie.Defence
@@ -465,10 +485,13 @@ func Tutoriel(joueur *Character_class, tour int) int {
 
 					fmt.Print("Appuyez sur Entrée pour continuer...")
 					fmt.Scanln()
+
+					// Poison
+					ennemie.Empoisonne = true
 				}
 
 			case 3:
-				fmt.Println("Vous ne pouvez pas fuir l'entraînement !")
+				fmt.Println("Vous ne pouvez pas fuir le tutoriel !")
 				fmt.Print("Appuyez sur Entrée pour continuer...")
 				fmt.Scanln()
 
@@ -482,7 +505,7 @@ func Tutoriel(joueur *Character_class, tour int) int {
 				Nettoyage(joueur)
 
 				fmt.Println("\n╔════════════════════════════════════════════════════════════════╗")
-				fmt.Println("║                    🏆 ENTRAÎNEMENT TERMINÉ ! 🏆                ║")
+				fmt.Println("║                      🏆 TUTORIEL TERMINÉ ! 🏆                  ║")
 				fmt.Println("╠════════════════════════════════════════════════════════════════╣")
 				fmt.Printf("║  👤 %-15s                    🎭 %-20s ║\n", "JOUEUR", strings.ToUpper(ennemie.Name))
 				fmt.Printf("║  ❤️  %3d/%-3d                           ❤️  %3d/%-3d             ║\n",
@@ -511,8 +534,8 @@ func Tutoriel(joueur *Character_class, tour int) int {
 			}
 
 			if joueur.Pv <= 0 {
-				fmt.Println("\n💀 Vous êtes mort pendant l'entraînement !")
-				fmt.Println("🔄 Pas de souci, c'est de l'entraînement ! Vos PV sont restaurés.")
+				fmt.Println("\n💀 Vous êtes mort pendant le tutoriel !")
+				fmt.Println("🔄 Pas de souci, c'est le tutoriel! Retentez votre chance au terrain d'entraînement de la ville !")
 				joueur.Pv = joueur.MaxPv
 				ennemie.Pv = 50 // Reset l'ennemi aussi
 				fmt.Print("Appuyez sur Entrée pour continuer...")
