@@ -48,9 +48,9 @@ func InitCharacter(nom string, classe int) Character_class {
 			MaxPv:          80,
 			Attaque:        30,
 			Defence:        7,
-			Gold:           200,
+			Gold:           300,
 			Niveau:         1,
-			Inventaire:     map[string]int{"Potion de soin": 4, "Potion de poison": 2},
+			Inventaire:     map[string]int{"Potion de soin": 2, "Potion de poison": 6},
 			upgradesBought: 0,
 			InventoryLimit: 10,
 			// Sorts
@@ -58,7 +58,8 @@ func InitCharacter(nom string, classe int) Character_class {
 		}
 	}
 
-	if classe == 666 {
+	// Easter Egg Harry Potter (HP)
+	if classe == 7 {
 		// Choix par défaut pour éviter les bugs
 		return Character_class{
 			Name:           "Harry Potter",

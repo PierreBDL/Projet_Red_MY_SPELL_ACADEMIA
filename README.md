@@ -7,25 +7,35 @@ Ce jeu a été développé par l'équipe MSA (MY SPELL ACADEMIA) qui est compos�
 ## 🎮 Fonctionnalités
 
 - Choix dans le terminal (CMD).
-- Création et personnalisation de votre sorcier.
-- Combats au tour par tour contre des monstres.
-- Economie dans le jeu pour acheter au marché et forgeron
-- ASCII Art + Emoji pour les graphismes.
+- Création et personnalisation de votre perso.
+- Combats avec du tour par tour contre des ennemis (gobelin et boss).
+- Economie dans le jeu pour acheter au marché, forgeron ou passer une nuit à l'auberge
+- ASCII Art + animations + Emoji pour les graphismes.
 - Sons pour les attaques
 - Musiques
+
+## 🥚 Easter Egg
+- Harry Potter est caché dans le jeu
 
 ---
 
 ## 📦 Installation
 
-Assurez-vous d’avoir **Go** installé (>= 1.20).  
-Clonez ce dépôt et compilez le projet :
+### Prérequis
+Avoir **Go** installé (Version 1.20 ou supérieure).  
+Avoir cloné ce dépôt git :
+
+
+### Dans un dossier que vous avez choisis
 
 ```bash
-# Clonez le dépôt
-git clone https://github.com/ton-pseudo/my-spell-academia.git
-
 # Accédez au dossier
+cd mon/chemin/vers/mon/dossier/
+
+# Clonez le dépôt
+git clone https://github.com/PierreBDL/Projet_Red_MY_SPELL_ACADEMIA
+
+# Aller dans le dossier
 cd PROJET_RED_MY_SPELL_ACADEMIA
 
 # Installer les outils pour les sons
