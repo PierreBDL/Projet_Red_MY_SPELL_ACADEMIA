@@ -98,9 +98,7 @@ func Combat(joueur *Character_class, ennemie *Character_class, tour int) int {
 				aleatoire_attaque_ennemie := Ennemis_type_attaque()
 				if aleatoire_attaque_ennemie >= 0 && aleatoire_attaque_ennemie < len(ennemie.Type_attaque) {
 					// Affichage du titre et de la description de l'attaque
-					titre := ennemie.Type_attaque[aleatoire_attaque_ennemie][0]
-					description := ennemie.Type_attaque[aleatoire_attaque_ennemie][1]
-					fmt.Printf("🗡️  %s : %s\n", titre, description)
+					fmt.Printf(" %s : %s\n", ennemie.Type_attaque[aleatoire_attaque_ennemie][0], ennemie.Type_attaque[aleatoire_attaque_ennemie][1])
 
 					// Conversion string vers int
 					degatsStr := ennemie.Type_attaque[aleatoire_attaque_ennemie][2]
@@ -112,7 +110,7 @@ func Combat(joueur *Character_class, ennemie *Character_class, tour int) int {
 						degats_ennemi = (degats + ennemie.Attaque) - joueur.Defence
 					}
 				} else {
-					fmt.Printf("🗡️  Attaque de base : Le %s vous attaque !\n", ennemie.Name)
+					fmt.Printf(" Attaque de base : Le %s vous attaque !\n", ennemie.Name)
 					degats_ennemi = ennemie.Attaque - joueur.Defence
 				}
 
@@ -132,83 +130,184 @@ func Combat(joueur *Character_class, ennemie *Character_class, tour int) int {
 				// Choisir le type de l'attaque
 				choix_sort := 0
 				fmt.Println("\nChoississez votre sort :")
-				fmt.Println("1]", joueur.Sorts[0][0])
-				fmt.Println("2]", joueur.Sorts[1][0])
-				fmt.Println("3] 🕊️  Retour")
+
+				// Afficher les sorts avec leur coût en mana
+				sorts := InitSpells()
+				for i := 0; i < len(joueur.Sorts) && i < len(sorts); i++ {
+					if joueur.Mana >= sorts[i].Mana_cost {
+						fmt.Printf("%d] %s (Coût: %d 💧)\n", i+1, joueur.Sorts[i][0], sorts[i].Mana_cost)
+					} else {
+						fmt.Printf("%d] %s (Coût: %d 💧) Pas assez de mana\n", i+1, joueur.Sorts[i][0], sorts[i].Mana_cost)
+					}
+				}
+				fmt.Println("4] 🕊️  Retour")
 				fmt.Print("Quel est votre choix ? ")
 				fmt.Scan(&choix_sort)
 
-				// Mauvaise saisie
-				if choix_sort != 1 && choix_sort != 2 && choix_sort != 3 {
+				// Validation du choix
+				for choix_sort != 1 && choix_sort != 2 && choix_sort != 3 && choix_sort != 4 {
 					fmt.Print("\033[A\033[A\033[A\033[A\033[2K")
-					// Choisir le type de l'attaque
-					choix_sort := 0
-					fmt.Println("1]", joueur.Sorts[0][0])
-					fmt.Println("2] ", joueur.Sorts[1][0])
-					fmt.Println("3] 🕊️  Retour")
+					fmt.Println("Choix invalide !")
+					for i := 0; i < len(joueur.Sorts) && i < len(sorts); i++ {
+						if joueur.Mana >= sorts[i].Mana_cost {
+							fmt.Printf("%d] %s (Coût: %d 💧)\n", i+1, joueur.Sorts[i][0], sorts[i].Mana_cost)
+						} else {
+							fmt.Printf("%d] %s (Coût: %d 💧)Pas assez de mana\n", i+1, joueur.Sorts[i][0], sorts[i].Mana_cost)
+						}
+					}
+					fmt.Println("4] 🕊️  Retour")
 					fmt.Print("Quel est votre choix ? ")
 					fmt.Scan(&choix_sort)
-				} else {
-					if choix_sort == 1 {
-						// Conversion en int
-						dommages, err := strconv.Atoi(joueur.Sorts[0][2])
-						if err != nil {
-							fmt.Println("Erreur de conversion :", err)
-							dommages = 10 // ou autre valeur par défaut
-						}
+				}
+
+				if choix_sort == 1 {
+					// Vérifier si le joueur a assez de mana
+					if joueur.Mana >= sorts[0].Mana_cost {
 						// Tour + 1
 						tour++
 
-						// Attaque du joueur avec description du sort
-						ennemie.Pv -= dommages
-						fmt.Print("\nVous lancez", joueur.Sorts[0][0])
-						fmt.Println(ennemie.Name, "", joueur.Sorts[0][1]) // Description du sort
-						fmt.Println("Vous infligez", dommages, "dommages magiques !")
+						// Utiliser le mana
+						joueur.Mana -= sorts[0].Mana_cost
 
-						// Attaque de l'ennemi - éviter les dégâts négatifs
-						degats_ennemi := ennemie.Attaque - joueur.Defence
+						// Attaque du joueur
+						dommages := sorts[0].Degats
+						ennemie.Pv -= dommages
+						fmt.Printf("\nVous lancez %s!\n", joueur.Sorts[0][0])
+						fmt.Printf("%s %s\n", ennemie.Name, joueur.Sorts[0][1])
+						fmt.Printf("Vous infligez %d dommages magiques !\n", dommages)
+
+						// Attaque de l'ennemi
+						var degats_ennemi int
+						aleatoire_attaque_ennemie := Ennemis_type_attaque()
+						if aleatoire_attaque_ennemie >= 0 && aleatoire_attaque_ennemie < len(ennemie.Type_attaque) {
+							fmt.Printf("%s : %s\n", ennemie.Type_attaque[aleatoire_attaque_ennemie][0], ennemie.Type_attaque[aleatoire_attaque_ennemie][1])
+							degatsStr := ennemie.Type_attaque[aleatoire_attaque_ennemie][2]
+							degats, err := strconv.Atoi(degatsStr)
+							if err != nil {
+								degats_ennemi = ennemie.Attaque - joueur.Defence
+							} else {
+								degats_ennemi = degats - joueur.Defence
+							}
+						} else {
+							fmt.Printf("Attaque de base : Le %s vous attaque !\n", ennemie.Name)
+							degats_ennemi = ennemie.Attaque - joueur.Defence
+						}
 						if degats_ennemi < 1 {
 							degats_ennemi = 1
 						}
 						joueur.Pv -= degats_ennemi
 						fmt.Println("Le", ennemie.Name, "vous inflige", degats_ennemi, "dommages !\n")
 
-						// Pause pour permettre au joueur de lire
+						// Pause
 						fmt.Print("Appuyez sur Entrée pour continuer...")
 						fmt.Scanln()
-					} else if choix_sort == 2 {
-						// Conversion en int
-						dommages, err := strconv.Atoi(joueur.Sorts[1][2])
-						if err != nil {
-							fmt.Println("Erreur de conversion :", err)
-							dommages = 15 // ou autre valeur par défaut
-						}
+					} else {
+						fmt.Print("Pas assez de mana !")
+						fmt.Print("Appuyez sur Entrée pour continuer...")
+						fmt.Scanln()
+						continue // Retour au menu d'attaque
+					}
+				} else if choix_sort == 2 {
+					// Vérifier si le joueur a assez de mana
+					if joueur.Mana >= sorts[1].Mana_cost {
 						// Tour + 1
 						tour++
+
+						// Utiliser le mana
+						joueur.Mana -= sorts[1].Mana_cost
 
 						// Son pour le sort Incendio
-						JouerSon("../sounds/tonnerre.wav") // Même son que dans entrainement.go
+						JouerSon("../sounds/tonnerre.wav")
 
-						// Attaque du joueur avec description du sort
-						ennemie.Pv -= (dommages)
-						fmt.Print("\nVous lancez", joueur.Sorts[1][0], "!")
-						fmt.Println(ennemie.Name, "", joueur.Sorts[1][1]) // Description du sort
-						fmt.Println("Vous infligez", dommages, "dommages magiques !")
-
-						// Attaque de l'ennemi - éviter les dégâts négatifs
-						degats_ennemi := ennemie.Attaque - joueur.Defence
+						// Attaque du joueur
+						dommages := sorts[1].Degats
+						ennemie.Pv -= dommages
+						fmt.Printf("\nVous lancez %s!\n", joueur.Sorts[1][0])
+						fmt.Printf("%s %s\n", ennemie.Name, joueur.Sorts[1][1])
+						fmt.Printf("Vous infligez %d dommages magiques !\n", dommages)
+						// Attaque de l'ennemi
+						var degats_ennemi int
+						aleatoire_attaque_ennemie := Ennemis_type_attaque()
+						if aleatoire_attaque_ennemie >= 0 && aleatoire_attaque_ennemie < len(ennemie.Type_attaque) {
+							fmt.Printf(" %s : %s\n", ennemie.Type_attaque[aleatoire_attaque_ennemie][0], ennemie.Type_attaque[aleatoire_attaque_ennemie][1])
+							degatsStr := ennemie.Type_attaque[aleatoire_attaque_ennemie][2]
+							degats, err := strconv.Atoi(degatsStr)
+							if err != nil {
+								degats_ennemi = ennemie.Attaque - joueur.Defence
+							} else {
+								degats_ennemi = degats - joueur.Defence
+							}
+						} else {
+							fmt.Printf("Attaque de base : Le %s vous attaque !\n", ennemie.Name)
+							degats_ennemi = ennemie.Attaque - joueur.Defence
+						}
 						if degats_ennemi < 1 {
 							degats_ennemi = 1
 						}
 						joueur.Pv -= degats_ennemi
 						fmt.Println("Le", ennemie.Name, "vous inflige", degats_ennemi, "dommages !\n")
 
-						// Pause pour permettre au joueur de lire
+						// Pause
 						fmt.Print("Appuyez sur Entrée pour continuer...")
 						fmt.Scanln()
-					} else if choix_sort == 3 {
-						break
+					} else {
+						fmt.Print("Pas assez de mana !\n")
+						fmt.Print("Appuyez sur Entrée pour continuer...")
+						fmt.Scanln()
+						continue // Retour au menu d'attaque
 					}
+				} else if choix_sort == 3 {
+					// Vérifier si le joueur a assez de mana
+					if joueur.Mana >= sorts[2].Mana_cost {
+						// Tour + 1
+						tour++
+
+						// Utiliser le mana
+						joueur.Mana -= sorts[2].Mana_cost
+
+						// Son pour le sort Incendio
+						JouerSon("../sounds/tonnerre.wav")
+
+						// Attaque du joueur
+						dommages := sorts[2].Degats
+						ennemie.Pv -= dommages
+						fmt.Printf("\nVous lancez %s!\n", joueur.Sorts[2][0])
+						fmt.Printf("%s %s\n", ennemie.Name, joueur.Sorts[2][1])
+						fmt.Printf("Vous infligez %d dommages magiques !\n", dommages)
+
+						// Attaque de l'ennemi
+						var degats_ennemi int
+						aleatoire_attaque_ennemie := Ennemis_type_attaque()
+						if aleatoire_attaque_ennemie >= 0 && aleatoire_attaque_ennemie < len(ennemie.Type_attaque) {
+							fmt.Printf(" %s : %s\n", ennemie.Type_attaque[aleatoire_attaque_ennemie][0], ennemie.Type_attaque[aleatoire_attaque_ennemie][1])
+							degatsStr := ennemie.Type_attaque[aleatoire_attaque_ennemie][2]
+							degats, err := strconv.Atoi(degatsStr)
+							if err != nil {
+								degats_ennemi = ennemie.Attaque - joueur.Defence
+							} else {
+								degats_ennemi = degats - joueur.Defence
+							}
+						} else {
+							fmt.Printf("Attaque de base : Le %s vous attaque !\n", ennemie.Name)
+							degats_ennemi = ennemie.Attaque - joueur.Defence
+						}
+						if degats_ennemi < 1 {
+							degats_ennemi = 1
+						}
+						joueur.Pv -= degats_ennemi
+						fmt.Println("Le", ennemie.Name, "vous inflige", degats_ennemi, "dommages !\n")
+
+						// Pause
+						fmt.Print("Appuyez sur Entrée pour continuer...")
+						fmt.Scanln()
+					} else {
+						fmt.Print("Pas assez de mana !\n")
+						fmt.Print("Appuyez sur Entrée pour continuer...")
+						fmt.Scanln()
+						continue // Retour au menu d'attaque
+					}
+				} else if choix_type_attaque == 4 {
+					continue // Retour au menu principal
 				}
 			}
 

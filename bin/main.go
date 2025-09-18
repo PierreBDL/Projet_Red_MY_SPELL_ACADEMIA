@@ -108,16 +108,28 @@ func main() {
 				// Création du perso avec la classe alchimiste
 				majuscule := cases.Title(language.French)
 				caracter = MSA.InitCharacter(majuscule.String(name), 2)
-			case 666:
+			case 7:
 				// Easter Egg Harry Poter
 				majuscule := cases.Title(language.French)
-				caracter = MSA.InitCharacter(majuscule.String(""), 666)
+				caracter = MSA.InitCharacter(majuscule.String(""), 7)
 			default:
 				// Nettoyer la console
 				fmt.Print("\033[A\033[2K")
 				fmt.Print("\033[A\033[2K")
-				fmt.Print("Quel est votre choix ? ")
-				fmt.Scan(&choix_classe)
+				for choix_classe != 1 && choix_classe != 2 && choix_classe != 7 {
+					fmt.Print("\033[A\033[2K")
+					fmt.Print("\033[A\033[2K")
+					fmt.Print("\033[A\033[2K")
+					fmt.Print("\033[A\033[2K")
+					// Choix de la classe du personnage
+					choix_classe := 0
+					fmt.Println("\nQue voulez-vous être ?")
+					fmt.Println("1] Sorcier")
+					fmt.Println("2] Alchimiste")
+					fmt.Print("Quel est votre choix ? ")
+					fmt.Scan(&choix_classe)
+					fmt.Print("")
+				}
 
 			}
 
