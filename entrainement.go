@@ -7,6 +7,9 @@ import (
 )
 
 func Entrainement(joueur *Character_class) {
+	// Musique de fond
+	JouerMusique("combat.mp3")
+
 	// Pitch du tutoriel
 	fmt.Println("Dans cet entraînement, vous allez apprendre à mener un combat et à vous soigner !")
 	// Pause

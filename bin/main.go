@@ -15,6 +15,9 @@ import (
 )
 
 func main() {
+	// Nettoyer la console
+	fmt.Print("\033[H\033[2J")
+
 	// Arrêter la musique
 	MSA.ArreterMusique()
 	// Fonctionnement
@@ -22,7 +25,7 @@ func main() {
 	running := true
 
 	// Musique de fond
-	err := MSA.JouerMusique("../musics/menu.mp3")
+	err := MSA.JouerMusique("No More Magic.mp3")
 	if err != nil {
 		// Musique non disponible, continuer sans musique
 		fmt.Println("🎵 Musique non disponible")
@@ -126,6 +129,13 @@ func main() {
 
 			// Boucle infinie
 			for running {
+				// Musique de fond
+				err := MSA.JouerMusique("../musics/menu.mp3")
+				if err != nil {
+					// Musique non disponible, continuer sans musique
+					fmt.Println("🎵 Musique non disponible")
+				}
+
 				// 1er tour : affichage du message d'accueil et tutoriel
 				if tour == 1 {
 					fmt.Println("\nVous débutez votre aventure dans le monde de la magie !")
@@ -195,6 +205,8 @@ func main() {
 						// Arrêter la musique
 						MSA.ArreterMusique()
 						running = false
+						// Nettoyer la console
+						fmt.Print("\033[H\033[2J")
 					default:
 						break
 					}
@@ -208,6 +220,8 @@ func main() {
 			// Quitter le jeu
 			fmt.Println("Au revoir !")
 			running = false
+			// Nettoyer la console
+			fmt.Print("\033[H\033[2J")
 		}
 	}
 	MSA.ArreterMusique()

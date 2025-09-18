@@ -47,9 +47,9 @@ func Tutoriel(joueur *Character_class, tour int) int {
 
 	for choix_attaque != 1 {
 		fmt.Println("Attaquez avec votre épée !\n")
-		fmt.Println("1] 🗡️  Attaquer <-- Choisissez cette option")
+		fmt.Println("1] 🗡️ Attaquer <-- Choisissez cette option")
 		fmt.Println("2] 📦 Regarder dans l'inventaire")
-		fmt.Println("3] 🕊️  Quittez le terrain d'entraînement")
+		fmt.Println("3] 🕊️ Quittez le terrain d'entraînement")
 		fmt.Print("Quel est votre choix ? ")
 		fmt.Scan(&choix_attaque)
 
@@ -97,9 +97,9 @@ func Tutoriel(joueur *Character_class, tour int) int {
 		choix_soins := 0
 		for choix_soins != 2 {
 			fmt.Println("Soignez-vous avec l'inventaire !\n")
-			fmt.Println("1] 🗡️  Attaquer")
+			fmt.Println("1] 🗡️ Attaquer")
 			fmt.Println("2] 📦 Regarder dans l'inventaire <-- Choisissez cette option")
-			fmt.Println("3] 🕊️  Fuir")
+			fmt.Println("3] 🕊️ Fuir")
 			fmt.Print("Quel est votre choix ? ")
 			fmt.Scan(&choix_soins)
 
@@ -169,9 +169,9 @@ func Tutoriel(joueur *Character_class, tour int) int {
 			fmt.Println("╚════════════════════════════════════════════════════════════════╝")
 
 			fmt.Println("\nPour lancer un sort, choisissez d'abord 'Attaquer', puis 'Lancer un sort' !")
-			fmt.Println("1] 🗡️  Attaquer")
+			fmt.Println("1] 🗡️ Attaquer")
 			fmt.Println("2] 📦 Regarder dans l'inventaire")
-			fmt.Println("3] 🕊️  Continuer l'entraînement")
+			fmt.Println("3] 🕊️ Continuer l'entraînement")
 			fmt.Print("Quel est votre choix ? ")
 			fmt.Scan(&choix_attaque)
 
@@ -293,20 +293,20 @@ func Tutoriel(joueur *Character_class, tour int) int {
 			fmt.Println("║                 🏆 COMBAT FINAL D'ENTRAÎNEMENT 🏆              ║")
 			fmt.Println("╠════════════════════════════════════════════════════════════════╣")
 			fmt.Printf("║  👤 %-15s                    🎭 %-20s ║\n", "JOUEUR", strings.ToUpper(ennemie.Name))
-			fmt.Printf("║  ❤️  %3d/%-3d                           ❤️  %3d/%-3d            ║\n",
+			fmt.Printf("║  ❤️  %3d/%-3d                           ❤️  %3d/%-3d             ║\n",
 				joueur.Pv, joueur.MaxPv, ennemie.Pv, ennemie.MaxPv)
-			fmt.Printf("║  ⚔️  %-3d                               ⚔️  %-3d                ║\n",
+			fmt.Printf("║  ⚔️  %-3d                               ⚔️  %-3d                 ║\n",
 				joueur.Attaque, ennemie.Attaque)
-			fmt.Printf("║  🛡️  %-3d                               🛡️  %-3d                ║\n",
+			fmt.Printf("║  🛡️  %-3d                               🛡️  %-3d                 ║\n",
 				joueur.Defence, ennemie.Defence)
 			fmt.Println("╚════════════════════════════════════════════════════════════════╝")
 
 			// Choix de l'attaque
 			choix_attaque := 0
 			println("Utilisez toutes vos compétences ! Que voulez-vous faire ?")
-			fmt.Println("1] 🗡️  Attaquer")
+			fmt.Println("1] 🗡️ Attaquer")
 			fmt.Println("2] 📦 Regarder dans l'inventaire")
-			fmt.Println("3] 🕊️  Fuir")
+			fmt.Println("3] 🕊️ Fuir")
 			fmt.Print("Quel est votre choix ? ")
 			fmt.Scan(&choix_attaque)
 
@@ -394,7 +394,7 @@ func Tutoriel(joueur *Character_class, tour int) int {
 							"   O  ◊              💥         O\n  /|\\|                        /|\\\n  / \\|                        / \\",
 							"   O  ◊                 💥      O\n  /|\\|                        /|\\\n  / \\|                        / \\",
 							"   O  ◊                    💥   O\n  /|\\|                        /|\\\n  / \\|                        / \\",
-							"   O  ◊                    💥💢O\n  /|\\|                        💢|\\\n  / \\|                        / \\",
+							"   O  ◊                    💥💢O\n  /|\\|                        |\\\n  / \\|                        / \\",
 							"   O  ◊                         O\n  /|\\|                        /|\\\n  / \\|                        / \\",
 						}
 
@@ -482,14 +482,14 @@ func Tutoriel(joueur *Character_class, tour int) int {
 				Nettoyage(joueur)
 
 				fmt.Println("\n╔════════════════════════════════════════════════════════════════╗")
-				fmt.Println("║                    🏆 ENTRAÎNEMENT TERMINÉ ! 🏆                 ║")
+				fmt.Println("║                    🏆 ENTRAÎNEMENT TERMINÉ ! 🏆                ║")
 				fmt.Println("╠════════════════════════════════════════════════════════════════╣")
-				fmt.Printf("║  👤 %-15s                    🎭 %-15s      ║\n", "JOUEUR", strings.ToUpper(ennemie.Name))
-				fmt.Printf("║  ❤️  %3d/%-3d                           ❤️  %3d/%-3d               ║\n",
+				fmt.Printf("║  👤 %-15s                    🎭 %-20s ║\n", "JOUEUR", strings.ToUpper(ennemie.Name))
+				fmt.Printf("║  ❤️  %3d/%-3d                           ❤️  %3d/%-3d             ║\n",
 					joueur.Pv, joueur.MaxPv, ennemie.Pv, ennemie.MaxPv)
-				fmt.Printf("║  ⚔️  %-3d                               ⚔️  %-3d                ║\n",
+				fmt.Printf("║  ⚔️  %-3d                               ⚔️  %-3d                 ║\n",
 					joueur.Attaque, ennemie.Attaque)
-				fmt.Printf("║  🛡️  %-3d                               🛡️  %-3d                ║\n",
+				fmt.Printf("║  🛡️  %-3d                               🛡️  %-3d                 ║\n",
 					joueur.Defence, ennemie.Defence)
 				fmt.Println("╚════════════════════════════════════════════════════════════════╝")
 

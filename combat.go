@@ -2,14 +2,26 @@ package MSA
 
 import (
 	"fmt"
+	"math/rand"
 	"strconv"
 	"strings"
+	"time"
 )
 
 func Combat(joueur *Character_class, ennemie *Character_class, tour int) int {
 
 	// Musique de combat
-	JouerMusique("combat.mp3")
+	// Choisir aléartoirement une musique de combat
+	rand.Seed(int64(time.Now().UnixNano()))
+	combatMusic := []string{
+		"../musics/combat/Tetris Thème Officiel.mp3",
+		"../musics/combat/Joshua McLean - Mountain Trials ♫ NO COPYRIGHT 8-bit Music.mp3",
+		"../musics/combat.mp3",
+	}
+	err := JouerMusique(combatMusic[rand.Intn(len(combatMusic))])
+	if err != nil {
+		fmt.Printf("🎵 Erreur musique combat: %v\n", err)
+	}
 
 	// Tant que l'ennemie ou le joueur a des PVs
 	for ennemie.Pv > 0 && joueur.Pv > 0 {
@@ -71,7 +83,7 @@ func Combat(joueur *Character_class, ennemie *Character_class, tour int) int {
 				tour++
 
 				// Son
-				JouerSon("./sounds/slash2.ogg") // Même son que dans entrainement.go
+				JouerSon("../sounds/slash2.ogg") // Même son que dans entrainement.go
 
 				// Attaque du joueur
 				degats_joueur := joueur.Attaque - ennemie.Defence
@@ -168,7 +180,7 @@ func Combat(joueur *Character_class, ennemie *Character_class, tour int) int {
 						tour++
 
 						// Son pour le sort Incendio
-						JouerSon("./sounds/tonnerre.wav") // Même son que dans entrainement.go
+						JouerSon("../sounds/tonnerre.wav") // Même son que dans entrainement.go
 
 						// Attaque du joueur avec description du sort
 						ennemie.Pv -= (dommages)
