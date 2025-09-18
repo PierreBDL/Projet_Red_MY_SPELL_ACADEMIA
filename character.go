@@ -15,6 +15,8 @@ type Character_class struct {
 	Sorts          [][]string // Nom, description, dégats
 	Equipement     [][]string // Casque, Armure, Jambières
 	Armes          []string   // Arme
+	// Ennemis
+	Type_attaque [][]string // attaques ennemis
 }
 
 func InitCharacter(nom string, classe int) Character_class {
@@ -99,6 +101,9 @@ func InitEnnemi(monstre string) Character_class {
 			Defence: 5,
 			Gold:    10, // Récompense
 			Niveau:  1,
+			Type_attaque: [][]string{{"Griffe", "Le gobelin vous griffe et vous inflige 10 points de dégâts.", "10"},
+				{"Coup de massue", "Le gobelin vous assène un coup de massue et vous inflige 15 points de dégâts.", "15"},
+				{"Coup de pied", "Le gobelin vous assène un coup de pied et vous inflige 20 points de dégâts.", "20"}},
 		}
 	}
 	if monstre == "boss" {
@@ -111,6 +116,9 @@ func InitEnnemi(monstre string) Character_class {
 			Defence: 5,
 			Gold:    40, // Récompense
 			Niveau:  3,
+			Type_attaque: [][]string{{"Griffe", "Le boss vous griffe et vous inflige 10 points de dégâts.", "10"}, {"Coup de massue", "Le boss vous assène un coup de massue et vous inflige 15 points de dégâts.", "15"},
+				{"Coup de pied", "Le boss vous assène un coup de pied et vous inflige 20 points de dégâts.", "20"},
+				{"Charge", "Le boss vous charge et vous inflige 25 points de dégâts.", "25"}},
 		}
 	}
 	return Character_class{
