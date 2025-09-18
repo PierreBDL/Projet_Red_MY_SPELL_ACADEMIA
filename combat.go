@@ -54,126 +54,141 @@ func Combat(joueur *Character_class, ennemie *Character_class, tour int) int {
 		case 1:
 			// Choisir le type de l'attaque
 			choix_type_attaque := 0
-			fmt.Println("1] 🗡️  Attaque à l'épée")
-			fmt.Println("2] 🪄  Lancer un sort")
-			fmt.Println("3] 🕊️  Retour")
-			fmt.Print("Quel est votre choix ? ")
-			fmt.Scan(&choix_type_attaque)
-
-			// Mauvaise saisie
-			if choix_type_attaque != 1 && choix_type_attaque != 2 && choix_type_attaque != 3 {
-				fmt.Print("\033[A\033[A\033[A\033[A\033[2K")
-				// Choisir le type de l'attaque
-				choix_type_attaque := 0
+			for {
 				fmt.Println("1] 🗡️  Attaque à l'épée")
 				fmt.Println("2] 🪄  Lancer un sort")
 				fmt.Println("3] 🕊️  Retour")
 				fmt.Print("Quel est votre choix ? ")
 				fmt.Scan(&choix_type_attaque)
-			} else {
-				if choix_type_attaque == 1 {
-					// Tour + 1
-					tour++
+				if choix_type_attaque == 1 || choix_type_attaque == 2 || choix_type_attaque == 3 {
+					break
+				}
+				fmt.Println("❌ Choix invalide, recommencez.")
+			}
 
-					// Son
-					JouerSon("./sounds/slash2.ogg") // Même son que dans entrainement.go
+			if choix_type_attaque == 1 {
+				// Tour + 1
+				tour++
 
-					// Attaque du joueur - éviter les dégâts négatifs
-					degats_joueur := joueur.Attaque - ennemie.Defence
-					if degats_joueur < 1 {
-						degats_joueur = 1 // Minimum 1 dégât
+				// Son
+				JouerSon("./sounds/slash2.ogg") // Même son que dans entrainement.go
+
+				// Attaque du joueur
+				degats_joueur := joueur.Attaque - ennemie.Defence
+				if degats_joueur < 1 {
+					degats_joueur = 1 // Minimum 1 dégât
+				}
+				ennemie.Pv -= degats_joueur
+				fmt.Println("\nVous infligez", degats_joueur, "dommages !")
+
+				// Attaque de l'ennemi
+				var degats_ennemi int
+				aleatoire_attaque_ennemie := Ennemis_type_attaque()
+				if aleatoire_attaque_ennemie >= 0 && aleatoire_attaque_ennemie < len(ennemie.Type_attaque) {
+					fmt.Printf("%s : %s\n", ennemie.Type_attaque[aleatoire_attaque_ennemie][0], ennemie.Type_attaque[aleatoire_attaque_ennemie][1])
+					// Conversion string vers int
+					degats_s := ennemie.Type_attaque[aleatoire_attaque_ennemie][2]
+					degats, err := strconv.Atoi(degats_s)
+					if err != nil {
+						degats_ennemi = ennemie.Attaque - joueur.Defence
+					} else {
+						degats_ennemi = degats - joueur.Defence
 					}
-					ennemie.Pv -= degats_joueur
-					fmt.Println("\nVous infligez", degats_joueur, "dommages !")
+				} else {
+					fmt.Printf("Attaque de base : Le %s vous attaque !\n", ennemie.Name)
+					degats_ennemi = ennemie.Attaque - joueur.Defence
+				}
+				// Éviter les dégâts négatifs
+				if degats_ennemi < 1 {
+					degats_ennemi = 1 // Minimum 1 dégât
+				}
+				joueur.Pv -= degats_ennemi
+				fmt.Println("Le", ennemie.Name, "vous inflige", degats_ennemi, "dommages !\n")
 
-					// Attaque de l'ennemi - éviter les dégâts négatifs
-					degats_ennemi := ennemie.Attaque - joueur.Defence
-					if degats_ennemi < 1 {
-						degats_ennemi = 1 // Minimum 1 dégât
-					}
-					joueur.Pv -= degats_ennemi
-					fmt.Println("Le", ennemie.Name, "vous inflige", degats_ennemi, "dommages !\n")
-				} else if choix_type_attaque == 2 {
+				// Pause
+				fmt.Print("Appuyez sur Entrée pour continuer...")
+				fmt.Scanln()
+
+			} else if choix_type_attaque == 2 {
+				// Choisir le type de l'attaque
+				choix_sort := 0
+				fmt.Println("\nChoississez votre sort :")
+				fmt.Println("1]", joueur.Sorts[0][0])
+				fmt.Println("2]", joueur.Sorts[1][0])
+				fmt.Println("3] 🕊️  Retour")
+				fmt.Print("Quel est votre choix ? ")
+				fmt.Scan(&choix_sort)
+
+				// Mauvaise saisie
+				if choix_sort != 1 && choix_sort != 2 && choix_sort != 3 {
+					fmt.Print("\033[A\033[A\033[A\033[A\033[2K")
 					// Choisir le type de l'attaque
 					choix_sort := 0
-					fmt.Println("\nChoississez votre sort :")
 					fmt.Println("1]", joueur.Sorts[0][0])
-					fmt.Println("2]", joueur.Sorts[1][0])
+					fmt.Println("2] ", joueur.Sorts[1][0])
 					fmt.Println("3] 🕊️  Retour")
 					fmt.Print("Quel est votre choix ? ")
 					fmt.Scan(&choix_sort)
-
-					// Mauvaise saisie
-					if choix_sort != 1 && choix_sort != 2 && choix_sort != 3 {
-						fmt.Print("\033[A\033[A\033[A\033[A\033[2K")
-						// Choisir le type de l'attaque
-						choix_sort := 0
-						fmt.Println("1]", joueur.Sorts[0][0])
-						fmt.Println("2] ", joueur.Sorts[1][0])
-						fmt.Println("3] 🕊️  Retour")
-						fmt.Print("Quel est votre choix ? ")
-						fmt.Scan(&choix_sort)
-					} else {
-						if choix_sort == 1 {
-							// Conversion en int
-							dommages, err := strconv.Atoi(joueur.Sorts[0][2])
-							if err != nil {
-								fmt.Println("Erreur de conversion :", err)
-								dommages = 10 // ou autre valeur par défaut
-							}
-							// Tour + 1
-							tour++
-
-							// Attaque du joueur avec description du sort
-							ennemie.Pv -= dommages
-							fmt.Print("\nVous lancez", joueur.Sorts[0][0])
-							fmt.Println(ennemie.Name, "", joueur.Sorts[0][1]) // Description du sort
-							fmt.Println("Vous infligez", dommages, "dommages magiques !")
-
-							// Attaque de l'ennemi - éviter les dégâts négatifs
-							degats_ennemi := ennemie.Attaque - joueur.Defence
-							if degats_ennemi < 1 {
-								degats_ennemi = 1
-							}
-							joueur.Pv -= degats_ennemi
-							fmt.Println("Le", ennemie.Name, "vous inflige", degats_ennemi, "dommages !\n")
-
-							// Pause pour permettre au joueur de lire
-							fmt.Print("Appuyez sur Entrée pour continuer...")
-							fmt.Scanln()
-						} else if choix_sort == 2 {
-							// Conversion en int
-							dommages, err := strconv.Atoi(joueur.Sorts[1][2])
-							if err != nil {
-								fmt.Println("Erreur de conversion :", err)
-								dommages = 15 // ou autre valeur par défaut
-							}
-							// Tour + 1
-							tour++
-
-							// Son pour le sort Incendio
-							JouerSon("./sounds/tonnerre.wav") // Même son que dans entrainement.go
-
-							// Attaque du joueur avec description du sort
-							ennemie.Pv -= (dommages)
-							fmt.Print("\nVous lancez", joueur.Sorts[1][0], "!")
-							fmt.Println(ennemie.Name, "", joueur.Sorts[1][1]) // Description du sort
-							fmt.Println("Vous infligez", dommages, "dommages magiques !")
-
-							// Attaque de l'ennemi - éviter les dégâts négatifs
-							degats_ennemi := ennemie.Attaque - joueur.Defence
-							if degats_ennemi < 1 {
-								degats_ennemi = 1
-							}
-							joueur.Pv -= degats_ennemi
-							fmt.Println("Le", ennemie.Name, "vous inflige", degats_ennemi, "dommages !\n")
-
-							// Pause pour permettre au joueur de lire
-							fmt.Print("Appuyez sur Entrée pour continuer...")
-							fmt.Scanln()
-						} else if choix_sort == 3 {
-							break
+				} else {
+					if choix_sort == 1 {
+						// Conversion en int
+						dommages, err := strconv.Atoi(joueur.Sorts[0][2])
+						if err != nil {
+							fmt.Println("Erreur de conversion :", err)
+							dommages = 10 // ou autre valeur par défaut
 						}
+						// Tour + 1
+						tour++
+
+						// Attaque du joueur avec description du sort
+						ennemie.Pv -= dommages
+						fmt.Print("\nVous lancez", joueur.Sorts[0][0])
+						fmt.Println(ennemie.Name, "", joueur.Sorts[0][1]) // Description du sort
+						fmt.Println("Vous infligez", dommages, "dommages magiques !")
+
+						// Attaque de l'ennemi - éviter les dégâts négatifs
+						degats_ennemi := ennemie.Attaque - joueur.Defence
+						if degats_ennemi < 1 {
+							degats_ennemi = 1
+						}
+						joueur.Pv -= degats_ennemi
+						fmt.Println("Le", ennemie.Name, "vous inflige", degats_ennemi, "dommages !\n")
+
+						// Pause pour permettre au joueur de lire
+						fmt.Print("Appuyez sur Entrée pour continuer...")
+						fmt.Scanln()
+					} else if choix_sort == 2 {
+						// Conversion en int
+						dommages, err := strconv.Atoi(joueur.Sorts[1][2])
+						if err != nil {
+							fmt.Println("Erreur de conversion :", err)
+							dommages = 15 // ou autre valeur par défaut
+						}
+						// Tour + 1
+						tour++
+
+						// Son pour le sort Incendio
+						JouerSon("./sounds/tonnerre.wav") // Même son que dans entrainement.go
+
+						// Attaque du joueur avec description du sort
+						ennemie.Pv -= (dommages)
+						fmt.Print("\nVous lancez", joueur.Sorts[1][0], "!")
+						fmt.Println(ennemie.Name, "", joueur.Sorts[1][1]) // Description du sort
+						fmt.Println("Vous infligez", dommages, "dommages magiques !")
+
+						// Attaque de l'ennemi - éviter les dégâts négatifs
+						degats_ennemi := ennemie.Attaque - joueur.Defence
+						if degats_ennemi < 1 {
+							degats_ennemi = 1
+						}
+						joueur.Pv -= degats_ennemi
+						fmt.Println("Le", ennemie.Name, "vous inflige", degats_ennemi, "dommages !\n")
+
+						// Pause pour permettre au joueur de lire
+						fmt.Print("Appuyez sur Entrée pour continuer...")
+						fmt.Scanln()
+					} else if choix_sort == 3 {
+						break
 					}
 				}
 			}

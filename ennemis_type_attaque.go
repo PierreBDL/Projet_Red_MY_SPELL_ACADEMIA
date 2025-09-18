@@ -5,16 +5,16 @@ import (
 	"time"
 )
 
-func Ennemis_type_attaque(ennemi string) int {
+func Ennemis_type_attaque() int {
 	// Création du générateur d'aléatoire
 	rand.Seed(time.Now().UnixNano())
-
+	val := rand.Float64()
 	// Attaque aléatoire
-	if rand.Float64() < 0.5 {
+	if val <= 0.5 {
 		return 0
-	} else if rand.Float64() > 0.5 && rand.Float64() < 0.8 {
+	} else if val <= 0.8 {
 		return 1
-	} else if rand.Float64() > 0.8 && rand.Float64() < 1 {
+	} else if val <= 1 {
 		return 2
 	}
 
